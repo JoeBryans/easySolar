@@ -4,6 +4,7 @@ import Power from "@/components/dasboard/Power";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRouter } from "next/navigation";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 
@@ -11,11 +12,11 @@ const page = () => {
   const [formData, setFormData] = React.useState("");
   const [contents, setContent] = React.useState([]);
   const [title, setTitle] = React.useState("");
+  const router = useRouter();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,8 +37,6 @@ const page = () => {
       const json = JSON.parse(data);
       const { content } = json;
       // const estimate=content.replace(/<\/?p>/g, "");
-      const estimate = content;
-      console.log("json content", json);
 
       setContent(json);
       if (res.ok) {
@@ -50,6 +49,9 @@ const page = () => {
             body: JSON.stringify({ content: contents, title }),
           });
           const data = await respond.json();
+          if (respond.ok) {
+            router.push("/dashboard");
+          }
           console.log(data);
         } catch (error) {
           console.log(error);
@@ -61,7 +63,6 @@ const page = () => {
       alert("Something went wrong");
     }
   };
-  console.log("content", contents);
 
   return (
     <div className="w-full mb-20">
@@ -71,7 +72,7 @@ const page = () => {
             <h1 className="text-center w-full my-2 text-xl sm:text-3xl lg:text-4xl font-bold flex items-center gap-2">
               Let's Generate Your
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-400 via-purple-600 ">
-                AI Video
+                Solar calculations
               </span>
             </h1>
             <h2 className="text-center my-2 text-bold text-2xl">
@@ -160,7 +161,11 @@ const page = () => {
               </div>
             </Label>
 
-            <Button className="w-full" onClick={handleSubmit}>
+            <Button
+              variant={"primary"}
+              className="w-full"
+              onClick={handleSubmit}
+            >
               Generate
             </Button>
           </form>
