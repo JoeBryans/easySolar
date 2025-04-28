@@ -24,7 +24,7 @@ const page = () => {
     try {
       const Datas = JSON.stringify(formData);
       console.log(Datas);
-      const res = await fetch("http://localhost:3000/api/generate", {
+      const res = await fetch("/api/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,7 +41,7 @@ const page = () => {
       setContent(json);
       if (res.ok) {
         try {
-          const respond = await fetch("http://localhost:3000/api/estimate", {
+          const respond = await fetch("/api/estimate", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
