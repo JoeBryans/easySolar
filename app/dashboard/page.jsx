@@ -59,11 +59,18 @@ const page = () => {
       </div>
       <Container>
         <div>
-          {Content.map((item, index) => {
+          {Content?.map((item, index) => {
             return (
               <div key={index}>
-                {/* <ReactMarkdown>{item.content}</ReactMarkdown> */}
-                <Markdown>{item.content}</Markdown>
+                <div>
+                  {item.content.map((item, index) => {
+                    return (
+                      <div key={index}>
+                        <ReactMarkdown>{item}</ReactMarkdown>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             );
           })}

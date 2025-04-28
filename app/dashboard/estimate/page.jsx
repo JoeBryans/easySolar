@@ -5,9 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import React from "react";
+import ReactMarkdown from "react-markdown";
 
 const page = () => {
   const [formData, setFormData] = React.useState("");
+  const [contents, setContent] = React.useState([]);
+  const [title, setTitle] = React.useState("");
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -20,20 +23,46 @@ const page = () => {
     try {
       const Datas = JSON.stringify(formData);
       console.log(Datas);
-      const res = await fetch("http://localhost:3000/api/estimate", {
+      const res = await fetch("http://localhost:3000/api/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
+      console.log(res);
+
       const data = await res.json();
-      console.log(data);
+      const json = JSON.parse(data);
+      const { content } = json;
+      // const estimate=content.replace(/<\/?p>/g, "");
+      const estimate = content;
+      console.log("json content", json);
+
+      setContent(json);
+      if (res.ok) {
+        try {
+          const respond = await fetch("http://localhost:3000/api/estimate", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ content: contents, title }),
+          });
+          const data = await respond.json();
+          console.log(data);
+        } catch (error) {
+          console.log(error);
+          alert("Something went wrong");
+        }
+      }
     } catch (error) {
       console.log(error);
       alert("Something went wrong");
     }
   };
+  console.log("content", contents);
+
   return (
     <div className="w-full mb-20">
       <Container>
@@ -55,7 +84,8 @@ const page = () => {
                 placeholder="Enter your title"
                 className="w-full"
                 name="title "
-                onChange={handleChange}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
               />
               <div className="w-full flex items-center gap-2 ">
                 The title should be the total power to be generated
@@ -134,6 +164,15 @@ const page = () => {
               Generate
             </Button>
           </form>
+          <div className="w-full flex flex-col items-center justify-center">
+            {contents?.map((item, index) => {
+              return (
+                <div key={index}>
+                  <ReactMarkdown>{item.content}</ReactMarkdown>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </Container>
     </div>
