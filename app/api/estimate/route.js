@@ -44,36 +44,36 @@ export async function POST(request) {
         },
       },
     });
-    const Tableresult = await gemini.models.generateContent({
-      model: "gemini-2.0-flash",
-      contents: Tprompt,
-      config: {
-        responseMimeType: "application/json",
-        responseSchema: {
-          type: Type.ARRAY,
-          items: {
-            type: Type.OBJECT,
-            properties: {
-              content: {
-                type: Type.STRING,
-                description: "estimate of the solar system",
-                nullable: false,
-              },
-            },
-            required: ["estimate"],
-          },
-        },
-      },
-    });
+    // const Tableresult = await gemini.models.generateContent({
+    //   model: "gemini-2.0-flash",
+    //   contents: Tprompt,
+    //   config: {
+    //     responseMimeType: "application/json",
+    //     responseSchema: {
+    //       type: Type.ARRAY,
+    //       items: {
+    //         type: Type.OBJECT,
+    //         properties: {
+    //           estimate: {
+    //             type: Type.STRING,
+    //             description: "estimate of the solar system",
+    //             nullable: false,
+    //           },
+    //         },
+    //         required: ["estimate"],
+    //       },
+    //     },
+    //   },
+    // });
 
-    console.log("Tableresult", Tableresult);
+    // console.log("Tableresult", Tableresult);
     console.log("AiModel", AiModel);
-
+    const items = JSON.parse(JSON.stringify(AiModel.text));
     const extimate = await prisma.estimate.create({
       data: {
-        title: title,
-        table: Tableresult.text,
-        content: AiModel.text,
+        // title: title,
+        // table: "Tableresult.text",
+        content: items,
       },
     });
     return NextResponse.json(extimate);

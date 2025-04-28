@@ -18,6 +18,16 @@ const page = () => {
     fetchData();
   }, []);
   console.log("Content", Content);
+  // const mapContent = Content.map((item, index) => {
+  //   return (
+  //     <div key={index}>
+  //       {/* <ReactMarkdown>{item.content}</ReactMarkdown> */}
+  //       <Markdown>{item.content}</Markdown>
+  //     </div>
+  //   );
+  // });
+  // const Cont = JSON.parse(Content[0]);
+  // console.log("Cont", Cont);
 
   const text = `
     # Welcome to Solar AI

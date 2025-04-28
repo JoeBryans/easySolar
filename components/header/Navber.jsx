@@ -1,10 +1,14 @@
 "use client";
 import React from "react";
-import { SignInButton } from "@clerk/nextjs";
+import { SignInButton, useUser } from "@clerk/nextjs";
 import Logo from "./Logo";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+  // get clerk user
+  // const user = useUser();
+  // console.log("user", user);
+
   const path = usePathname();
   const startWith = path !== "/";
   return (
