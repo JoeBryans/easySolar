@@ -1,12 +1,8 @@
-import prisma from "@/lib/db";
 import { GoogleGenAI, Type } from "@google/genai";
-// import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/dataBase";
 import { estimateModel } from "@/lib/models/modes";
-// const gemini = new GoogleGenerativeAI({
-//   apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY,
-// });
+
 const gemini = new GoogleGenAI({ apiKey: process.env.NEXT_GEMINI_API_KEY });
 const Schema = `Calculation of a solar system with total power is 6kw , total energy consumption is 5000wh, 24volt battery, peak sun hours is 5, panel is 300watt `;
 
