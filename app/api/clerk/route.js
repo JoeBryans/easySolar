@@ -25,8 +25,9 @@ export async function POST(req) {
   const body = JSON.stringify(payload);
   console.log(body);
   const { data, type } = await wh.verify(body, svixHeaders);
-  console.log(data);
-  console.log(type);
+
+  console.log("data", data);
+  console.log("type", type);
 
   // user data
   const userData = {
