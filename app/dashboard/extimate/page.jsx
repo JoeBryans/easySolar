@@ -1,0 +1,143 @@
+"use client";
+import Container from "@/components/Container";
+import Power from "@/components/dasboard/Power";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import React from "react";
+
+const page = () => {
+  const [formData, setFormData] = React.useState("");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  console.log(formData);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const Datas = JSON.stringify(formData);
+      console.log(Datas);
+      const res = await fetch("http://localhost:3000/api/estimate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong");
+    }
+  };
+  return (
+    <div className="w-full mb-20">
+      <Container>
+        <div className="w-[35rem] mx-auto mt-5 flex flex-col gap-5 ">
+          <div className="w-full flex flex-col items-center justify-center">
+            <h1 className="text-center w-full my-2 text-xl sm:text-3xl lg:text-4xl font-bold flex items-center gap-2">
+              Let's Generate Your
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-400 via-purple-600 ">
+                AI Video
+              </span>
+            </h1>
+            <h2 className="text-center my-2 text-bold text-2xl">
+              first craft your script video or video ideals
+            </h2>
+          </div>
+          <form className="w-full flex flex-col gap-5 ">
+            <Label className={"w-full flex flex-col gap-3 "}>
+              <Input
+                placeholder="Enter your title"
+                className="w-full"
+                name="title "
+                onChange={handleChange}
+              />
+              <div className="w-full flex items-center gap-2 ">
+                The title should be the total power to be generated
+              </div>
+            </Label>
+            <Label className={"w-full flex flex-col gap-3 "}>
+              <Input
+                placeholder="Enter your total power"
+                className="w-full"
+                name="totalPower"
+                onChange={handleChange}
+              />
+              <div className="w-full flex items-center gap-2 ">
+                enter the total power consumption or <Power /> to make
+                calculation of various component{" "}
+              </div>
+            </Label>
+            <Label className={"w-full flex flex-col gap-3 "}>
+              <Input
+                placeholder="Enter your total energy consumption"
+                className="w-full"
+                name="totalEnergy"
+                onChange={handleChange}
+              />
+              <div className="w-full flex items-center gap-2 ">
+                enter the total power consumption or <Power /> to make
+                calculation of various component{" "}
+              </div>
+            </Label>
+            <Label className={"w-full flex flex-col gap-3 "}>
+              <Input
+                placeholder="Battery Voltage"
+                className="w-full"
+                name="batterySize"
+                onChange={handleChange}
+              />
+              <div className="w-full flex items-center gap-2 ">
+                enter the Battery Voltage of your choice
+              </div>
+            </Label>
+            <Label className={"w-full flex flex-col gap-3 "}>
+              <Input
+                placeholder="Depth of Discharge of the battery"
+                className="w-full"
+                name="DOD"
+                onChange={handleChange}
+              />
+              <div className="w-full flex items-center gap-2 ">
+                enter the Depth of Discharge of the battery. lowest 50%
+              </div>
+            </Label>
+            <Label className={"w-full flex flex-col gap-3 "}>
+              <Input
+                placeholder="Peak Sun Hours"
+                className="w-full"
+                name="peakSunHours"
+                onChange={handleChange}
+              />
+              <div className="w-full flex items-center gap-2 ">
+                enter the Peak Sun Hours in your region{" "}
+              </div>
+            </Label>
+            <Label className={"w-full flex flex-col gap-3 "}>
+              <Input
+                placeholder="Panel Wattage"
+                className="w-full"
+                name="panelWattage"
+                onChange={handleChange}
+              />
+              <div className="w-full flex items-center gap-2 ">
+                enter the Panel Wattage of your choice
+              </div>
+            </Label>
+
+            <Button className="w-full" onClick={handleSubmit}>
+              Generate
+            </Button>
+          </form>
+        </div>
+      </Container>
+    </div>
+  );
+};
+
+export default page;
