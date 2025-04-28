@@ -49,7 +49,7 @@ const items = [
 //   },
 export function SideBar() {
   const router = useRouter();
-  const navigate = () => router.push("/dashboard/extimate");
+  const navigate = () => router.push("/dashboard/estimate");
   return (
     <Sidebar>
       <SidebarContent>
@@ -65,7 +65,7 @@ export function SideBar() {
               onClick={navigate}
               className=" w-max     bg-gradient-to-r from-blue-500 to-purple-400 via-purple-600 text-xl font-bold cursor-pointer rounded-lg py-2 text-background"
             >
-              Create Videos with AI
+              Generate estimate
             </Button>
           </SidebarGroupLabel>
 

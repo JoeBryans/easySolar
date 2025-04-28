@@ -20,14 +20,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider
-      appearance={{
-        elements: {
-          footer: "hidden",
-        },
-      }}
-    >
-      <html lang="en">
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning={false}>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >

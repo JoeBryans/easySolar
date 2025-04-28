@@ -75,11 +75,8 @@ const page = () => {
                 Solar calculations
               </span>
             </h1>
-            <h2 className="text-center my-2 text-bold text-2xl">
-              first craft your script video or video ideals
-            </h2>
           </div>
-          <form className="w-full flex flex-col gap-5 ">
+          <form className="max-w-[450px] w-[400px] flex flex-col gap-5 ">
             <Label className={"w-full flex flex-col gap-3 "}>
               <Input
                 placeholder="Enter your title"
@@ -100,8 +97,8 @@ const page = () => {
                 onChange={handleChange}
               />
               <div className="w-full flex items-center gap-2 ">
-                enter the total power consumption or <Power /> to make
-                calculation of various component{" "}
+                enter the total power consumption
+                {/* or <Power /> to make calculation of various component{" "} */}
               </div>
             </Label>
             <Label className={"w-full flex flex-col gap-3 "}>
@@ -112,8 +109,8 @@ const page = () => {
                 onChange={handleChange}
               />
               <div className="w-full flex items-center gap-2 ">
-                enter the total power consumption or <Power /> to make
-                calculation of various component{" "}
+                enter the total power consumption
+                {/* or <Power /> to make  calculation of various component{" "} */}
               </div>
             </Label>
             <Label className={"w-full flex flex-col gap-3 "}>
@@ -163,7 +160,7 @@ const page = () => {
 
             <Button
               variant={"primary"}
-              className="w-full"
+              className="w-full text-center cursor-pointer text-white hover:text-muted bg-gradient-to-r from-blue-500 to-purple-400 via-purple-600 "
               onClick={handleSubmit}
             >
               Generate

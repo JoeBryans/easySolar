@@ -9,7 +9,7 @@ const layout = ({ children }) => {
         <div className=" ">
           <SideBar />
         </div>
-        <main className=" w-full flex gap-5  ">
+        <main className=" w-max flex   ">
           <div className="block md:hidden">
             <SidebarTrigger />
           </div>

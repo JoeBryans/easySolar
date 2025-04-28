@@ -45,7 +45,7 @@ const page = () => {
   return (
     <div className="w-full  min-h-full flex flex-col">
       {/* banner */}
-      <div className="flex flex-col items-center justify-center h-64  bg-gradient-to-r from-blue-500 to-purple-400 via-purple-600 text-xl font-bold cursor-pointer rounded-lg  text-background">
+      <div className="flex flex-col items-center justify-center h-64  bg-gradient-to-r from-blue-500 to-purple-400 via-purple-600 text-xl font-bold cursor-pointer rounded-lg  text-background w-max px-5">
         <div className="font-bold text-2xl w-96 text-center">
           <span className="text-white">Welcome To easy-solar </span>
           <span className="text-white">
