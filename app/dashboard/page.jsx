@@ -47,7 +47,10 @@ const page = () => {
       {/* banner */}
       <div className="flex flex-col items-center justify-center h-64  bg-gradient-to-r from-blue-500 to-purple-400 via-purple-600 text-xl font-bold cursor-pointer rounded-lg  text-background">
         <div className="font-bold text-2xl w-96 text-center">
-          <span className="text-white">Welcome To Your Creative Studio</span>
+          <span className="text-white">Welcome To easy-solar </span>
+          <span className="text-white">
+            making your solar calculations and estimate easy and fast
+          </span>
           <div className="flex gap-3 items-center mt-5 ">
             <Input
               className="w-full  text-white text-xl py-1 placeholder:text-white"
