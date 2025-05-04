@@ -1,5 +1,6 @@
 "use client";
 import Container from "@/components/Container";
+import Logo from "@/components/header/Logo";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import Image from "next/image";
@@ -45,15 +46,16 @@ const page = () => {
   return (
     <div className="w-full  min-h-full flex flex-col">
       {/* banner */}
-      <div className="flex flex-col items-center justify-center h-64  bg-gradient-to-r from-blue-500 to-purple-400 via-purple-600 text-xl font-bold cursor-pointer rounded-lg  text-background w-max px-5">
-        <div className="font-bold text-2xl w-96 text-center">
-          <span className="text-white">Welcome To easy-solar </span>
+      <div className="flex flex-col items-center justify-center h-64  bg-gradient-to-r from-blue-500 to-purple-400 via-purple-600 text-xl font-bold cursor-pointer rounded-lg  text-background w-full px-5">
+        <div className="font-bold text-2xl  w-max text-center">
+          <span className="text-white">Welcome To easySolar </span>
+          <br />
           <span className="text-white">
             making your solar calculations and estimate easy and fast
           </span>
-          <div className="flex gap-3 items-center mt-5 ">
+          <div className="flex gap-3 items-center justify-center  mt-5 ">
             <Input
-              className="w-full  text-white text-xl py-1 placeholder:text-white"
+              className="w-[400px]  text-white text-xl py-1 placeholder:text-white"
               placeholder="...Search"
             />
             <Search className=" text-white " size={35} />

@@ -49,9 +49,9 @@ const page = () => {
             body: JSON.stringify({ content: contents, title }),
           });
           const data = await respond.json();
-          if (respond.ok) {
-            router.push("/dashboard");
-          }
+          // if (respond.ok) {
+          //   // router.push("/dashboard");
+          // }
           console.log(data);
         } catch (error) {
           console.log(error);
@@ -67,7 +67,7 @@ const page = () => {
   return (
     <div className="w-full mb-20">
       <Container>
-        <div className="w-[35rem] mx-auto mt-5 flex flex-col gap-5 ">
+        <div className="w-[45rem] mx-auto mt-5 flex flex-col items-center gap-5 ">
           <div className="w-full flex flex-col items-center justify-center">
             <h1 className="text-center w-full my-2 text-xl sm:text-3xl lg:text-4xl font-bold flex items-center gap-2">
               Let's Generate Your
@@ -76,7 +76,7 @@ const page = () => {
               </span>
             </h1>
           </div>
-          <form className="max-w-[450px] w-[400px] flex flex-col gap-5 ">
+          <form className="max-w-[500px] w-[400px] flex flex-col gap-5 ">
             <Label className={"w-full flex flex-col gap-3 "}>
               <Input
                 placeholder="Enter your title"

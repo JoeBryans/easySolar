@@ -5,11 +5,11 @@ import React from "react";
 const layout = ({ children }) => {
   return (
     <SidebarProvider>
-      <div className="w-full flex gap-5 justify-between">
+      <div className="w-full flex ">
         <div className=" ">
           <SideBar />
         </div>
-        <main className=" w-max flex   ">
+        <main className=" w-full flex  ">
           <div className="block md:hidden">
             <SidebarTrigger />
           </div>

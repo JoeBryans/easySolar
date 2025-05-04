@@ -12,17 +12,16 @@ const Hero = () => {
       <Container>
         <div className="w-full flex flex-col items-center h-full mt-20 gap-4 ">
           <h1 className="font-bold lg:text-8xl md:text-4xl text-3xl mb-5">
-            easySolar Calculation Generator
+            easySolar Calculation
           </h1>
           <span className="font-bold lg:text-6xl md:text-3xl text-2xl mb-2 ">
             making your solar calculations and estimate easy and fast with{" "}
             <Logo />
           </span>
           <p className="font-semibold text-center md:text-xl  ">
-            Generate solar panels, solar chargers, solar panels and solar
-            chargers. <Logo /> is a powerful AI that can help you generate the
-            size of solar panels, chargers controller, batteries quantity and
-            estimated of the power to be generated.
+            <Logo /> is a powerful AI that can help you generate the size of
+            solar panels, chargers controller, batteries quantity and estimated
+            of the power to be generated.
           </p>
           <div
             // initial={{ scale: 1 }}
