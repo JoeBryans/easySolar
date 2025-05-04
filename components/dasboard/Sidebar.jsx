@@ -63,7 +63,7 @@ export function SideBar() {
             <Button
               variant={"outline"}
               onClick={navigate}
-              className=" w-max     bg-gradient-to-r from-blue-500 to-purple-400 via-purple-600 text-xl font-bold cursor-pointer rounded-lg py-2 text-background"
+              className=" w-max  hover:text-white/45   bg-gradient-to-r from-blue-500 to-purple-400 via-purple-600 text-xl font-bold cursor-pointer rounded-lg py-2 text-background"
             >
               Generate estimate
             </Button>

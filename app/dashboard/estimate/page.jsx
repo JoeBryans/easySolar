@@ -4,6 +4,7 @@ import Power from "@/components/dasboard/Power";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LoaderCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import ReactMarkdown from "react-markdown";
@@ -12,6 +13,7 @@ const page = () => {
   const [formData, setFormData] = React.useState("");
   const [contents, setContent] = React.useState([]);
   const [title, setTitle] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
   const router = useRouter();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,7 +22,7 @@ const page = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const Datas = JSON.stringify(formData);
       console.log(Datas);
@@ -35,7 +37,6 @@ const page = () => {
 
       const data = await res.json();
       const json = JSON.parse(data);
-      const { content } = json;
       // const estimate=content.replace(/<\/?p>/g, "");
 
       setContent(json);
@@ -53,12 +54,17 @@ const page = () => {
           //   // router.push("/dashboard");
           // }
           console.log(data);
+          setLoading(false);
         } catch (error) {
           console.log(error);
+          setLoading(false);
+
           alert("Something went wrong");
         }
       }
     } catch (error) {
+      setLoading(false);
+
       console.log(error);
       alert("Something went wrong");
     }
@@ -76,7 +82,7 @@ const page = () => {
               </span>
             </h1>
           </div>
-          <form className="w-max flex flex-col  gap-5 ">
+          <form className="max-w-[500px] w-[95%] p-4 shadow-xl rounded-2xl drop-shadow-xl flex  flex-col  gap-5 ">
             <Label className={"w-full flex flex-col gap-3 "}>
               <Input
                 placeholder="Enter your title"
@@ -160,10 +166,17 @@ const page = () => {
 
             <Button
               variant={"primary"}
+              disabled={loading}
               className="w-full text-center cursor-pointer text-white hover:text-muted bg-gradient-to-r from-blue-500 to-purple-400 via-purple-600 "
               onClick={handleSubmit}
             >
-              Generate
+              {loading ? (
+                <span className="flex items-center gap-1">
+                  Generate <LoaderCircle className="animate-spin " />
+                </span>
+              ) : (
+                <span>Generate</span>
+              )}
             </Button>
           </form>
           <div className="w-full flex flex-col items-center justify-center">
