@@ -1,4 +1,4 @@
-import { Svix } from "svix";
+
 import { Webhook } from "svix";
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
@@ -7,6 +7,7 @@ import connectDB from "@/lib/dataBase";
 
 export async function POST(req) {
   const wh = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
+ // const headersPayload = req.headers;
   const headersPayload = await headers();
   // const svix = new Svix({
   //     apiKey: process.env.CLERK_API_KEY,
@@ -19,6 +20,8 @@ export async function POST(req) {
     "svix-timestamp": headersPayload.get("svix-timestamp"),
     // "svix-webhook-id": headersPayload.get("svix-webhook-id"),
   };
+
+  
 
   const payload = await req.json();
 
