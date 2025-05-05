@@ -38,24 +38,15 @@ export async function POST(req) {
       email: data.email_addresses[0].email_address,
       image: data.image_url,
     };
+    console.log("userData", userData);
 
     // create user
     await connectDB();
-    switch (type) {
-      case "user.create":
-        const user = await userModel.create(userData);
-        console.log("user", user);
-        break;
-      case "user.updated":
-        await userModel.findOneAndUpdate({ _id: data.id }, userData, {
-          new: true,
-        });
-        break;
-      case "user.deleted":
-        await userModel.findOneAndDelete({ _id: data.id });
-        break;
-      default:
-        break;
+    try {
+      const user = await userModel.create(userData);
+      return NextResponse.json({ message: "event recieved", user });
+    } catch (error) {
+      console.log(error);
     }
     return NextResponse.json("event recieved");
   } catch (error) {
