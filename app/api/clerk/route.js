@@ -33,7 +33,7 @@ export async function POST(req) {
 
     // user data
     const userData = {
-      _id: data.id,
+      clerk_id: data.id,
       userName: data.username,
       email: data.email_addresses[0].email_address,
       image: data.image_url,
@@ -41,31 +41,22 @@ export async function POST(req) {
 
     // create user
     await connectDB();
-    if (type === "user.create") {
-      try {
+    switch (type) {
+      case "user.create":
         const user = await userModel.create(userData);
         console.log("user", user);
-
-        return NextResponse.json(user);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    if (type === "user.updated") {
-      const user = await userModel.findOneAndUpdate(
-        { _id: data.id },
-        userData,
-        {
+        break;
+      case "user.updated":
+        await userModel.findOneAndUpdate({ _id: data.id }, userData, {
           new: true,
-        }
-      );
-      return NextResponse.json(user);
+        });
+        break;
+      case "user.deleted":
+        await userModel.findOneAndDelete({ _id: data.id });
+        break;
+      default:
+        break;
     }
-    if (type === "user.deleted") {
-      const user = await userModel.findOneAndDelete({ _id: data.id });
-      return NextResponse.json(user);
-    }
-
     return NextResponse.json("event recieved");
   } catch (error) {
     console.log(error);
@@ -87,6 +78,23 @@ export async function POST(req) {
 // //      return NextResponse.json("user deleted");
 // //    default:
 // //  }
+
+//  if (type === "user.create") {
+//    const user = await userModel.create(userData);
+//    console.log("user", user);
+
+//    return NextResponse.json(user);
+//  }
+//  if (type === "user.updated") {
+//    const user = await userModel.findOneAndUpdate({ _id: data.id }, userData, {
+//      new: true,
+//    });
+//    return NextResponse.json(user);
+//  }
+//  if (type === "user.deleted") {
+//    const user = await userModel.findOneAndDelete({ _id: data.id });
+//    return NextResponse.json(user);
+//  }
 
 // import { Webhook } from "svix";
 // import { headers } from "next/headers";
