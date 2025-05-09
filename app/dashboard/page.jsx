@@ -63,10 +63,16 @@ const page = () => {
         </div>
       </div>
       <Container>
-        <div>
+        <div className="flex flex-col items-center justify-center my-5 ">
           {Content?.map((item, index) => {
             return (
-              <div key={index}>
+              <div
+                key={index}
+                className="w-full my-5 shadow-xl rounded-2xl drop-shadow-xl flex  flex-col  gap-5 p-5 "
+              >
+                <h2 className="text-center my-2 text-xl lg:text-2xl font-bold flex items-center gap-2">
+                  {item.title}
+                </h2>
                 <div>
                   {item.content.map((item, index) => {
                     return (
