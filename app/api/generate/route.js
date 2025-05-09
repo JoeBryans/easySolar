@@ -13,9 +13,10 @@ export async function POST(req) {
     DOD,
     peakSunHours,
     panelWattage,
+    inverterInput,
   } = body;
   //   const prompt = `Calculation of a solar system with total power:${totalPower} , total energy consumption is ${totalEnergy}wh, battery size is ${batterySize}volt, depth of discharge is ${DOD}, peak sun hours is ${peakSunHours}, panel is ${panelWattage} watt and also give the extimate of the solar system in table format`;
-  const prompt = `Calculation of a solar system with total power:${totalPower} , total energy consumption is ${totalEnergy}, battery size is ${batterySize}, depth of discharge is ${DOD}, peak sun hours is ${peakSunHours}, panel is ${panelWattage}  and also give the extimate of the solar system `;
+  const prompt = `Calculation of a solar system with total power:${totalPower} , total energy consumption is ${totalEnergy}, battery size is ${batterySize}, depth of discharge is ${DOD}, peak sun hours is ${peakSunHours}, panel is ${panelWattage},inverter input voltage is${inverterInput}  and also give the extimate of the solar system `;
 
   const response = await ai.models.generateContent({
     model: "gemini-2.0-flash",
@@ -39,6 +40,7 @@ export async function POST(req) {
     },
   });
 
-  console.log(response.text);
-  return NextResponse.json(response.text);
+  const data = JSON.parse(response.text);
+  console.log(data);
+  return NextResponse.json(data);
 }

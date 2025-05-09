@@ -1,27 +1,76 @@
 "use client";
 import Container from "@/components/Container";
-import Power from "@/components/dasboard/Power";
+// import Power from "@/components/dasboard/Power";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LoaderCircle } from "lucide-react";
-import { useRouter } from "next/navigation";
 import React from "react";
 import ReactMarkdown from "react-markdown";
-
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 const page = () => {
   const [formData, setFormData] = React.useState("");
   const [contents, setContent] = React.useState([]);
   const [title, setTitle] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const UserCredit = useSelector((state) => state.user.credit);
   const router = useRouter();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   try {
+  //     const Datas = JSON.stringify(formData);
+  //     const res = await axios.post("/api/generate", {
+  //       ...Datas,
+  //     });
+  //     console.log(res.data);
+
+  //     // const data = await res.json();
+  //     // const json = JSON.parse(data);
+  //     // const estimate=content.replace(/<\/?p>/g, "");
+
+  //     // setContent(json);
+  //     // if (res.status === 200) {
+  //     //   try {
+  //     //     const respond = await fetch("/api/estimate", {
+  //     //       method: "POST",
+  //     //       headers: {
+  //     //         "Content-Type": "application/json",
+  //     //       },
+  //     //       body: JSON.stringify({ content: contents, title }),
+  //     //     });
+  //     //     const data = await respond.json();
+
+  //     //     console.log(data);
+  //     //     setLoading(false);
+  //     //   } catch (error) {
+  //     //     console.log(error);
+  //     //     setLoading(false);
+
+  //     //     alert("Something went wrong");
+  //     //   }
+  //     // }
+  //   } catch (error) {
+  //     setLoading(false);
+
+  //     console.log(error);
+  //     alert("Something went wrong");
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (UserCredit === 0) {
+      // alert("Credit not enough, please add credit");
+      return router.push("/dashboard");
+    }
     setLoading(true);
     try {
       const Datas = JSON.stringify(formData);
@@ -36,10 +85,9 @@ const page = () => {
       console.log(res);
 
       const data = await res.json();
-      const json = JSON.parse(data);
       // const estimate=content.replace(/<\/?p>/g, "");
 
-      setContent(json);
+      setContent(data);
       if (res.ok) {
         try {
           const respond = await fetch("/api/estimate", {
@@ -47,13 +95,13 @@ const page = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ content: contents, title }),
+            body: JSON.stringify({ content: data, title }),
           });
-          const data = await respond.json();
+          const res = await respond.json();
           // if (respond.ok) {
           //   // router.push("/dashboard");
           // }
-          console.log(data);
+          console.log(res);
           setLoading(false);
         } catch (error) {
           console.log(error);
@@ -67,6 +115,8 @@ const page = () => {
 
       console.log(error);
       alert("Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -116,6 +166,18 @@ const page = () => {
               />
               <div className="w-full flex items-center gap-2 ">
                 enter the total power consumption
+                {/* or <Power /> to make  calculation of various component{" "} */}
+              </div>
+            </Label>
+            <Label className={"w-full flex flex-col gap-3 "}>
+              <Input
+                placeholder="Enter your inverter input voltage"
+                className="w-full"
+                name="inverterInput"
+                onChange={handleChange}
+              />
+              <div className="w-full flex items-center gap-2 ">
+                enter the inverter input voltage
                 {/* or <Power /> to make  calculation of various component{" "} */}
               </div>
             </Label>

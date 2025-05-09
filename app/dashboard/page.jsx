@@ -13,7 +13,7 @@ const page = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("/api/estimate");
-      const data = await res.json();
+      const data = await res?.json();
       setContent(data);
     };
     fetchData();
@@ -79,7 +79,7 @@ const page = () => {
               </div>
             );
           })}
-        </div>{" "}
+        </div>
       </Container>
     </div>
   );

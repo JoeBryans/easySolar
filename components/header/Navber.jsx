@@ -1,21 +1,45 @@
 "use client";
-import React from "react";
-import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import React, { useEffect } from "react";
+// import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import Logo from "./Logo";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { useSession } from "next-auth/react";
+import GetUser from "./GetUser";
+import { setItem } from "@/hooks/store/localStorage";
+import { useDispatch } from "react-redux";
+import { setCredit } from "@/hooks/store/slice/userSlice";
 
 const Navbar = () => {
   // get clerk user
   // const user = useUser();
   // console.log("user", user);
+  const dispatch = useDispatch();
+  const [credite, setCredite] = React.useState();
 
   const path = usePathname();
-  const { user } = useUser();
+  const { data, status } = useSession();
+  const user = data?.user;
   console.log("user", user);
 
   const startWith = path !== "/";
+
+  useEffect(() => {
+    if (user) {
+      const FetchData = async () => {
+        const res = await fetch("/api/user/credite");
+        const data = await res.json();
+        console.log(data);
+        dispatch(setCredit(data));
+        setItem("credit", data);
+        setCredite(data);
+      };
+      FetchData();
+    } else {
+      return;
+    }
+  }, [user]);
   return (
     <div className="w-full shadow">
       {startWith ? (
@@ -27,7 +51,30 @@ const Navbar = () => {
             <div className="flex-none">
               <ul className="menu menu-horizontal px-1">
                 <li className="text-lg font-demi-bold">
-                  {user ? <UserButton /> : <Link href="/sign-in">Sign In</Link>}
+                  {/* {user ? (
+                    <div className="w-10 h-10 rounded-full   flex items-center justify-center p-1">
+                      <Image
+                        src={user?.image || "/one-shot.jpeg"}
+                        alt="profie"
+                        width={800}
+                        height={800}
+                        className="rounded-full w-[100%] h-[100%] object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <Link href="/sign-in">Sign In</Link>
+                  )} */}
+                  <GetUser />
+                </li>
+                <li className="text-lg font-demi-bold mx-3 hover:bg-transparent">
+                  {user ? (
+                    <div className="flex items-center gap-2 px-4">
+                      <span>credite</span>
+                      <span className="w-8 h-8 rounded-full shadow-lg drop-shadow-xl  flex items-center justify-center p-1">
+                        {credite}
+                      </span>
+                    </div>
+                  ) : null}
                 </li>
               </ul>
             </div>
