@@ -10,6 +10,7 @@ import ReactMarkdown from "react-markdown";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { DialogCloseButton } from "@/components/dasboard/SubCard";
 const page = () => {
   const [formData, setFormData] = React.useState("");
   const [contents, setContent] = React.useState([]);
@@ -69,7 +70,8 @@ const page = () => {
     e.preventDefault();
     if (UserCredit === 0) {
       // alert("Credit not enough, please add credit");
-      return router.push("/dashboard");
+      // return router.push("/dashboard");
+      return <DialogCloseButton />;
     }
     setLoading(true);
     try {
