@@ -1,13 +1,10 @@
 "use client";
-import Container from "@/components/Container";
-// import Power from "@/components/dasboard/Power";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LoaderCircle } from "lucide-react";
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { DialogCloseButton } from "@/components/dasboard/SubCard";
@@ -24,55 +21,13 @@ const page = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   try {
-  //     const Datas = JSON.stringify(formData);
-  //     const res = await axios.post("/api/generate", {
-  //       ...Datas,
-  //     });
-  //     console.log(res.data);
-
-  //     // const data = await res.json();
-  //     // const json = JSON.parse(data);
-  //     // const estimate=content.replace(/<\/?p>/g, "");
-
-  //     // setContent(json);
-  //     // if (res.status === 200) {
-  //     //   try {
-  //     //     const respond = await fetch("/api/estimate", {
-  //     //       method: "POST",
-  //     //       headers: {
-  //     //         "Content-Type": "application/json",
-  //     //       },
-  //     //       body: JSON.stringify({ content: contents, title }),
-  //     //     });
-  //     //     const data = await respond.json();
-
-  //     //     console.log(data);
-  //     //     setLoading(false);
-  //     //   } catch (error) {
-  //     //     console.log(error);
-  //     //     setLoading(false);
-
-  //     //     alert("Something went wrong");
-  //     //   }
-  //     // }
-  //   } catch (error) {
-  //     setLoading(false);
-
-  //     console.log(error);
-  //     alert("Something went wrong");
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
-   // if (UserCredit === 0) {
-      // alert("Credit not enough, please add credit");
-      // return router.push("/dashboard");
-   //   return <DialogCloseButton />;
-   // }
+    if (UserCredit === 0) {
+      alert("Credit not enough, please add credit");
+      return router.push("/dashboard");
+      return <DialogCloseButton />;
+    }
     setLoading(true);
     try {
       const Datas = JSON.stringify(formData);
@@ -87,7 +42,6 @@ const page = () => {
       console.log(res);
 
       const data = await res.json();
-      // const estimate=content.replace(/<\/?p>/g, "");
 
       setContent(data);
       if (res.ok) {
@@ -123,18 +77,18 @@ const page = () => {
   };
 
   return (
-    <div className="w-full mb-20">
-      <Container>
-        <div className="w-[40rem] mx-auto mt-5 flex flex-col items-center  gap-5 ">
+    <div className="w-full mb-20 ">
+      <div className="w-full min-h-[100vh] flex flex-wrap-reverse mx-auto justify-start items-start gap-5 px-4 ">
+        <div className="w-[40rem]  mx-auto mt-5 flex flex-col items-start  gap-5 ">
           <div className="w-full  flex flex-col items-center justify-center">
-            <h1 className="text-center my-2 text-xl sm:text-3xl lg:text-4xl font-bold flex items-center gap-2">
+            <h1 className="text-center my-2 text-xl sm:text-2xl lg:text-3xl font-bold flex items-center gap-2">
               Let's Generate Your
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-400 via-purple-600 ">
                 Solar calculations
               </span>
             </h1>
           </div>
-          <form className="max-w-[500px] w-[95%] p-4 shadow-xl rounded-2xl drop-shadow-xl flex  flex-col  gap-5 ">
+          <form className="max-w-full w-[95%] p-4 shadow-xl rounded-2xl drop-shadow-xl flex  flex-col  gap-5 ">
             <Label className={"w-full flex flex-col gap-3 "}>
               <Input
                 placeholder="Enter your title"
@@ -183,7 +137,7 @@ const page = () => {
                 {/* or <Power /> to make  calculation of various component{" "} */}
               </div>
             </Label>
-<Label className={"w-full flex flex-col gap-3 "}>
+            <Label className={"w-full flex flex-col gap-3 "}>
               <Input
                 placeholder="eg 1hr, 3hr or 3hr*3days"
                 className="w-full"
@@ -191,11 +145,11 @@ const page = () => {
                 onChange={handleChange}
               />
               <div className="w-full flex items-center gap-2 ">
-                enter the days of autonomy 
+                enter the days of autonomy
                 {/* or <Power /> to make  calculation of various component{" "} */}
               </div>
             </Label>
-            
+
             <Label className={"w-full flex flex-col gap-3 "}>
               <Input
                 placeholder="Battery Voltage"
@@ -256,17 +210,19 @@ const page = () => {
               )}
             </Button>
           </form>
-          <div className="w-full flex flex-col items-center justify-center">
-            {contents?.map((item, index) => {
-              return (
-                <div key={index}>
-                  <ReactMarkdown>{item.content}</ReactMarkdown>
-                </div>
-              );
-            })}
-          </div>
+        </div>{" "}
+        <div
+          className={`${contents.length > 0 ? "shadow-lg drop-shadow-2xl px-5" : "flex"}  py-3 rounded-2xl my-24 mx-auto max-w-[600px] w-[95%] flex flex-col items-start justify-center`}
+        >
+          {contents?.map((item, index) => {
+            return (
+              <div key={index} className="w-[90%] ">
+                <ReactMarkdown>{item.content}</ReactMarkdown>
+              </div>
+            );
+          })}
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

@@ -122,11 +122,9 @@ const GetUser = ({ role }) => {
   }
   if (status === "unauthenticated") {
     return (
-      <Button variant={"outline"}>
-        <Link href={"/signIn"} className="font-bold ">
-          Sign in
-        </Link>
-      </Button>
+      <Link href={"/signIn"} className="font-bold ">
+        Sign in
+      </Link>
     );
   }
 };

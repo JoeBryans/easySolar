@@ -45,7 +45,7 @@ const Navbar = () => {
       {startWith ? (
         <div className="max-w-[65rem]  w-[90%] flex flex-col mx-auto">
           <div className="navbar bg-base-100 justify-end ">
-            <div className="flex-1">
+            <div className="flex-1 block md:hidden">
               <Logo />
             </div>
             <div className="flex-none">
@@ -94,7 +94,7 @@ const Navbar = () => {
                       <Link href="/dashboard">Dashboard</Link>
                     </Button>
                   ) : (
-                    <Link href="/sign-in">Sign In</Link>
+                    <Link href="/signIn">Sign In</Link>
                   )}
                 </li>
               </ul>
