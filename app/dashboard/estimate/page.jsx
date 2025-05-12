@@ -68,11 +68,11 @@ const page = () => {
   // };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (UserCredit === 0) {
+   // if (UserCredit === 0) {
       // alert("Credit not enough, please add credit");
       // return router.push("/dashboard");
-      return <DialogCloseButton />;
-    }
+   //   return <DialogCloseButton />;
+   // }
     setLoading(true);
     try {
       const Datas = JSON.stringify(formData);
