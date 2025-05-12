@@ -167,7 +167,7 @@ const page = () => {
                 onChange={handleChange}
               />
               <div className="w-full flex items-center gap-2 ">
-                enter the total power consumption
+                enter the total energy consumption
                 {/* or <Power /> to make  calculation of various component{" "} */}
               </div>
             </Label>
@@ -183,6 +183,19 @@ const page = () => {
                 {/* or <Power /> to make  calculation of various component{" "} */}
               </div>
             </Label>
+<Label className={"w-full flex flex-col gap-3 "}>
+              <Input
+                placeholder="eg 1hr, 3hr or 3hr*3days"
+                className="w-full"
+                name="autonomy"
+                onChange={handleChange}
+              />
+              <div className="w-full flex items-center gap-2 ">
+                enter the days of autonomy 
+                {/* or <Power /> to make  calculation of various component{" "} */}
+              </div>
+            </Label>
+            
             <Label className={"w-full flex flex-col gap-3 "}>
               <Input
                 placeholder="Battery Voltage"
