@@ -72,12 +72,24 @@ export async function POST(req) {
     inverterInput,
     autonomy,
   } = body;
-  //   const prompt = `Calculation of a solar system with total power:${totalPower} , total energy consumption is ${totalEnergy}wh, battery size is ${batterySize}volt, depth of discharge is ${DOD}, peak sun hours is ${peakSunHours}, panel is ${panelWattage} watt and also give the extimate of the solar system in table format`;
-  const prompt = `Well detailed  Calculation on a solar system with total power:${totalPower} , total energy consumption is ${totalEnergy}, battery size is ${batterySize}, depth of discharge is ${DOD}, the  autonomy is ${autonomy} peak sun hours is ${peakSunHours}, panel is ${panelWattage},inverter input voltage is${inverterInput}, ensuring recommendation for the system. and also give the estimate of the solar system  `;
+  const prompt = `Calculation of a solar system with total power:${totalPower} , total energy consumption is ${totalEnergy}wh, battery size is ${batterySize}volt, depth of discharge is ${DOD}, peak sun hours is ${peakSunHours}, panel is ${panelWattage} watt and also give the extimate of the solar system 
+  Follow the Following schema and return JSON data 
+ [
+      {
+         battery:"",
+         panel:"",
+         inverter:"",
+         charge controller:"",
+         total:"",
+         estimate:"",
+      }
+    ]  
+  `;
+  // const prompt = `Well detailed  Calculation on a solar system with total power:${totalPower} , total energy consumption is ${totalEnergy}, battery size is ${batterySize}, depth of discharge is ${DOD}, the  autonomy is ${autonomy} peak sun hours is ${peakSunHours}, panel is ${panelWattage},inverter input voltage is${inverterInput}, ensuring recommendation for the system. and also give the estimate of the solar system  `;
 
   const response = await ai.models.generateContent({
-    // model: "gemini-2.0-flash",
-    model: "gemini-2.5-flash-preview-04-17",
+    model: "gemini-2.0-flash",
+    // model: "gemini-2.5-flash-preview-04-17",
     contents: prompt,
     config: {
       responseMimeType: "application/json",
@@ -86,13 +98,49 @@ export async function POST(req) {
         items: {
           type: Type.OBJECT,
           properties: {
-            content: {
+            battery: {
+              type: Type.STRING,
+              description: "battery size",
+              nullable: false,
+            },
+            panel: {
+              type: Type.STRING,
+              description: "panel size",
+              nullable: false,
+            },
+            inverter: {
+              type: Type.STRING,
+              description: "inverter size",
+              nullable: false,
+            },
+            charge: {
+              type: Type.STRING,
+              description: "charge controller size",
+              nullable: false,
+            },
+            total: {
+              type: Type.STRING,
+              description: "total size",
+              nullable: false,
+            },
+            estimate: {
               type: Type.STRING,
               description: "Name of the recipe",
               nullable: false,
             },
+            // content: {
+            //   type: Type.STRING,
+            //   description: "content",
+            // },
           },
-          required: ["content"],
+          required: [
+            "battery",
+            "panel",
+            "inverter",
+            "charge",
+            "total",
+            "estimate",
+          ],
         },
       },
     },

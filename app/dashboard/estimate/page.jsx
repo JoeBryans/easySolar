@@ -26,7 +26,6 @@ const page = () => {
     if (UserCredit === 0) {
       alert("Credit not enough, please add credit");
       return router.push("/dashboard");
-      return <DialogCloseButton />;
     }
     setLoading(true);
     try {
@@ -75,6 +74,7 @@ const page = () => {
       setLoading(false);
     }
   };
+  console.log(contents);
 
   return (
     <div className="w-full mb-20 ">
@@ -216,8 +216,36 @@ const page = () => {
         >
           {contents?.map((item, index) => {
             return (
-              <div key={index} className="w-[90%] ">
-                <ReactMarkdown>{item.content}</ReactMarkdown>
+              <div
+                key={index}
+                className="w-[90%] flex flex-col items-start justify-start gap-4"
+              >
+                {/* <ReactMarkdown>{item.content}</ReactMarkdown> */}
+                {/* <h1>{item.title}</h1> */}
+                <div className="flex flex-col gap-4">
+                  <h1 className="text-xl font-bold ">Battery :</h1>
+                  <span>{item.battery}</span>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <h1 className="text-xl font-bold ">Panel :</h1>
+                  <span>{item.panel}</span>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <h1 className="text-xl font-bold ">Inverter :</h1>
+                  <span>{item.inverter}</span>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <h1 className="text-xl font-bold ">Charge Controller :</h1>
+                  <span>{item.charge}</span>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <h1 className="text-xl font-bold ">Total :</h1>
+                  <span>{item.total}</span>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <h1 className="text-xl font-bold ">Estimate :</h1>
+                  <span>{item.estimate}</span>
+                </div>
               </div>
             );
           })}

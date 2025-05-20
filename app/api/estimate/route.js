@@ -8,7 +8,7 @@ export async function POST(request) {
   const body = await request.json();
   const { title, content } = body;
   const estim = content.map((item) => {
-    return item.content;
+    return item;
   });
   console.log("content", content);
   console.log("estim", estim);
@@ -40,7 +40,12 @@ export async function POST(request) {
     const extimate = await prisma.estimates.create({
       data: {
         title: title,
-        content: estim,
+        battery: estim[0]?.battery,
+        panel: estim[0]?.panel,
+        inverter: estim[0]?.inverter,
+        charge: estim[0]?.charge,
+        total: estim[0]?.total,
+        estimate: estim[0]?.estimate,
         userId,
       },
     });

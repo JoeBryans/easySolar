@@ -4142,6 +4142,12 @@ export namespace Prisma {
   export type EstimatesMinAggregateOutputType = {
     id: string | null
     title: string | null
+    battery: string | null
+    panel: string | null
+    inverter: string | null
+    charge: string | null
+    total: string | null
+    estimate: string | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -4150,6 +4156,12 @@ export namespace Prisma {
   export type EstimatesMaxAggregateOutputType = {
     id: string | null
     title: string | null
+    battery: string | null
+    panel: string | null
+    inverter: string | null
+    charge: string | null
+    total: string | null
+    estimate: string | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -4157,8 +4169,13 @@ export namespace Prisma {
 
   export type EstimatesCountAggregateOutputType = {
     id: number
-    content: number
     title: number
+    battery: number
+    panel: number
+    inverter: number
+    charge: number
+    total: number
+    estimate: number
     userId: number
     createdAt: number
     updatedAt: number
@@ -4169,6 +4186,12 @@ export namespace Prisma {
   export type EstimatesMinAggregateInputType = {
     id?: true
     title?: true
+    battery?: true
+    panel?: true
+    inverter?: true
+    charge?: true
+    total?: true
+    estimate?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -4177,6 +4200,12 @@ export namespace Prisma {
   export type EstimatesMaxAggregateInputType = {
     id?: true
     title?: true
+    battery?: true
+    panel?: true
+    inverter?: true
+    charge?: true
+    total?: true
+    estimate?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -4184,8 +4213,13 @@ export namespace Prisma {
 
   export type EstimatesCountAggregateInputType = {
     id?: true
-    content?: true
     title?: true
+    battery?: true
+    panel?: true
+    inverter?: true
+    charge?: true
+    total?: true
+    estimate?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -4266,8 +4300,13 @@ export namespace Prisma {
 
   export type EstimatesGroupByOutputType = {
     id: string
-    content: string[]
     title: string
+    battery: string
+    panel: string
+    inverter: string
+    charge: string
+    total: string
+    estimate: string
     userId: string
     createdAt: Date
     updatedAt: Date
@@ -4292,8 +4331,13 @@ export namespace Prisma {
 
   export type estimatesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    content?: boolean
     title?: boolean
+    battery?: boolean
+    panel?: boolean
+    inverter?: boolean
+    charge?: boolean
+    total?: boolean
+    estimate?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4304,14 +4348,19 @@ export namespace Prisma {
 
   export type estimatesSelectScalar = {
     id?: boolean
-    content?: boolean
     title?: boolean
+    battery?: boolean
+    panel?: boolean
+    inverter?: boolean
+    charge?: boolean
+    total?: boolean
+    estimate?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type estimatesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "title" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["estimates"]>
+  export type estimatesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "battery" | "panel" | "inverter" | "charge" | "total" | "estimate" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["estimates"]>
   export type estimatesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -4323,8 +4372,13 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      content: string[]
       title: string
+      battery: string
+      panel: string
+      inverter: string
+      charge: string
+      total: string
+      estimate: string
       userId: string
       createdAt: Date
       updatedAt: Date
@@ -4722,8 +4776,13 @@ export namespace Prisma {
    */
   interface estimatesFieldRefs {
     readonly id: FieldRef<"estimates", 'String'>
-    readonly content: FieldRef<"estimates", 'String[]'>
     readonly title: FieldRef<"estimates", 'String'>
+    readonly battery: FieldRef<"estimates", 'String'>
+    readonly panel: FieldRef<"estimates", 'String'>
+    readonly inverter: FieldRef<"estimates", 'String'>
+    readonly charge: FieldRef<"estimates", 'String'>
+    readonly total: FieldRef<"estimates", 'String'>
+    readonly estimate: FieldRef<"estimates", 'String'>
     readonly userId: FieldRef<"estimates", 'String'>
     readonly createdAt: FieldRef<"estimates", 'DateTime'>
     readonly updatedAt: FieldRef<"estimates", 'DateTime'>
@@ -5160,8 +5219,13 @@ export namespace Prisma {
 
   export const EstimatesScalarFieldEnum: {
     id: 'id',
-    content: 'content',
     title: 'title',
+    battery: 'battery',
+    panel: 'panel',
+    inverter: 'inverter',
+    charge: 'charge',
+    total: 'total',
+    estimate: 'estimate',
     userId: 'userId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -5455,8 +5519,13 @@ export namespace Prisma {
     OR?: estimatesWhereInput[]
     NOT?: estimatesWhereInput | estimatesWhereInput[]
     id?: StringFilter<"estimates"> | string
-    content?: StringNullableListFilter<"estimates">
     title?: StringFilter<"estimates"> | string
+    battery?: StringFilter<"estimates"> | string
+    panel?: StringFilter<"estimates"> | string
+    inverter?: StringFilter<"estimates"> | string
+    charge?: StringFilter<"estimates"> | string
+    total?: StringFilter<"estimates"> | string
+    estimate?: StringFilter<"estimates"> | string
     userId?: StringFilter<"estimates"> | string
     createdAt?: DateTimeFilter<"estimates"> | Date | string
     updatedAt?: DateTimeFilter<"estimates"> | Date | string
@@ -5465,8 +5534,13 @@ export namespace Prisma {
 
   export type estimatesOrderByWithRelationInput = {
     id?: SortOrder
-    content?: SortOrder
     title?: SortOrder
+    battery?: SortOrder
+    panel?: SortOrder
+    inverter?: SortOrder
+    charge?: SortOrder
+    total?: SortOrder
+    estimate?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5478,8 +5552,13 @@ export namespace Prisma {
     AND?: estimatesWhereInput | estimatesWhereInput[]
     OR?: estimatesWhereInput[]
     NOT?: estimatesWhereInput | estimatesWhereInput[]
-    content?: StringNullableListFilter<"estimates">
     title?: StringFilter<"estimates"> | string
+    battery?: StringFilter<"estimates"> | string
+    panel?: StringFilter<"estimates"> | string
+    inverter?: StringFilter<"estimates"> | string
+    charge?: StringFilter<"estimates"> | string
+    total?: StringFilter<"estimates"> | string
+    estimate?: StringFilter<"estimates"> | string
     userId?: StringFilter<"estimates"> | string
     createdAt?: DateTimeFilter<"estimates"> | Date | string
     updatedAt?: DateTimeFilter<"estimates"> | Date | string
@@ -5488,8 +5567,13 @@ export namespace Prisma {
 
   export type estimatesOrderByWithAggregationInput = {
     id?: SortOrder
-    content?: SortOrder
     title?: SortOrder
+    battery?: SortOrder
+    panel?: SortOrder
+    inverter?: SortOrder
+    charge?: SortOrder
+    total?: SortOrder
+    estimate?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5503,8 +5587,13 @@ export namespace Prisma {
     OR?: estimatesScalarWhereWithAggregatesInput[]
     NOT?: estimatesScalarWhereWithAggregatesInput | estimatesScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"estimates"> | string
-    content?: StringNullableListFilter<"estimates">
     title?: StringWithAggregatesFilter<"estimates"> | string
+    battery?: StringWithAggregatesFilter<"estimates"> | string
+    panel?: StringWithAggregatesFilter<"estimates"> | string
+    inverter?: StringWithAggregatesFilter<"estimates"> | string
+    charge?: StringWithAggregatesFilter<"estimates"> | string
+    total?: StringWithAggregatesFilter<"estimates"> | string
+    estimate?: StringWithAggregatesFilter<"estimates"> | string
     userId?: StringWithAggregatesFilter<"estimates"> | string
     createdAt?: DateTimeWithAggregatesFilter<"estimates"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"estimates"> | Date | string
@@ -5718,8 +5807,13 @@ export namespace Prisma {
 
   export type estimatesCreateInput = {
     id?: string
-    content?: estimatesCreatecontentInput | string[]
     title: string
+    battery: string
+    panel: string
+    inverter: string
+    charge: string
+    total: string
+    estimate: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutEstimatesInput
@@ -5727,24 +5821,39 @@ export namespace Prisma {
 
   export type estimatesUncheckedCreateInput = {
     id?: string
-    content?: estimatesCreatecontentInput | string[]
     title: string
+    battery: string
+    panel: string
+    inverter: string
+    charge: string
+    total: string
+    estimate: string
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type estimatesUpdateInput = {
-    content?: estimatesUpdatecontentInput | string[]
     title?: StringFieldUpdateOperationsInput | string
+    battery?: StringFieldUpdateOperationsInput | string
+    panel?: StringFieldUpdateOperationsInput | string
+    inverter?: StringFieldUpdateOperationsInput | string
+    charge?: StringFieldUpdateOperationsInput | string
+    total?: StringFieldUpdateOperationsInput | string
+    estimate?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutEstimatesNestedInput
   }
 
   export type estimatesUncheckedUpdateInput = {
-    content?: estimatesUpdatecontentInput | string[]
     title?: StringFieldUpdateOperationsInput | string
+    battery?: StringFieldUpdateOperationsInput | string
+    panel?: StringFieldUpdateOperationsInput | string
+    inverter?: StringFieldUpdateOperationsInput | string
+    charge?: StringFieldUpdateOperationsInput | string
+    total?: StringFieldUpdateOperationsInput | string
+    estimate?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5752,23 +5861,38 @@ export namespace Prisma {
 
   export type estimatesCreateManyInput = {
     id?: string
-    content?: estimatesCreatecontentInput | string[]
     title: string
+    battery: string
+    panel: string
+    inverter: string
+    charge: string
+    total: string
+    estimate: string
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type estimatesUpdateManyMutationInput = {
-    content?: estimatesUpdatecontentInput | string[]
     title?: StringFieldUpdateOperationsInput | string
+    battery?: StringFieldUpdateOperationsInput | string
+    panel?: StringFieldUpdateOperationsInput | string
+    inverter?: StringFieldUpdateOperationsInput | string
+    charge?: StringFieldUpdateOperationsInput | string
+    total?: StringFieldUpdateOperationsInput | string
+    estimate?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type estimatesUncheckedUpdateManyInput = {
-    content?: estimatesUpdatecontentInput | string[]
     title?: StringFieldUpdateOperationsInput | string
+    battery?: StringFieldUpdateOperationsInput | string
+    panel?: StringFieldUpdateOperationsInput | string
+    inverter?: StringFieldUpdateOperationsInput | string
+    charge?: StringFieldUpdateOperationsInput | string
+    total?: StringFieldUpdateOperationsInput | string
+    estimate?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6050,14 +6174,6 @@ export namespace Prisma {
     v?: SortOrder
   }
 
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
-  }
-
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -6065,8 +6181,13 @@ export namespace Prisma {
 
   export type estimatesCountOrderByAggregateInput = {
     id?: SortOrder
-    content?: SortOrder
     title?: SortOrder
+    battery?: SortOrder
+    panel?: SortOrder
+    inverter?: SortOrder
+    charge?: SortOrder
+    total?: SortOrder
+    estimate?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6075,6 +6196,12 @@ export namespace Prisma {
   export type estimatesMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    battery?: SortOrder
+    panel?: SortOrder
+    inverter?: SortOrder
+    charge?: SortOrder
+    total?: SortOrder
+    estimate?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6083,6 +6210,12 @@ export namespace Prisma {
   export type estimatesMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    battery?: SortOrder
+    panel?: SortOrder
+    inverter?: SortOrder
+    charge?: SortOrder
+    total?: SortOrder
+    estimate?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6160,19 +6293,10 @@ export namespace Prisma {
     deleteMany?: estimatesScalarWhereInput | estimatesScalarWhereInput[]
   }
 
-  export type estimatesCreatecontentInput = {
-    set: string[]
-  }
-
   export type UserCreateNestedOneWithoutEstimatesInput = {
     create?: XOR<UserCreateWithoutEstimatesInput, UserUncheckedCreateWithoutEstimatesInput>
     connectOrCreate?: UserCreateOrConnectWithoutEstimatesInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type estimatesUpdatecontentInput = {
-    set?: string[]
-    push?: string | string[]
   }
 
   export type UserUpdateOneRequiredWithoutEstimatesNestedInput = {
@@ -6364,16 +6488,26 @@ export namespace Prisma {
 
   export type estimatesCreateWithoutUserInput = {
     id?: string
-    content?: estimatesCreatecontentInput | string[]
     title: string
+    battery: string
+    panel: string
+    inverter: string
+    charge: string
+    total: string
+    estimate: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type estimatesUncheckedCreateWithoutUserInput = {
     id?: string
-    content?: estimatesCreatecontentInput | string[]
     title: string
+    battery: string
+    panel: string
+    inverter: string
+    charge: string
+    total: string
+    estimate: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6408,8 +6542,13 @@ export namespace Prisma {
     OR?: estimatesScalarWhereInput[]
     NOT?: estimatesScalarWhereInput | estimatesScalarWhereInput[]
     id?: StringFilter<"estimates"> | string
-    content?: StringNullableListFilter<"estimates">
     title?: StringFilter<"estimates"> | string
+    battery?: StringFilter<"estimates"> | string
+    panel?: StringFilter<"estimates"> | string
+    inverter?: StringFilter<"estimates"> | string
+    charge?: StringFilter<"estimates"> | string
+    total?: StringFilter<"estimates"> | string
+    estimate?: StringFilter<"estimates"> | string
     userId?: StringFilter<"estimates"> | string
     createdAt?: DateTimeFilter<"estimates"> | Date | string
     updatedAt?: DateTimeFilter<"estimates"> | Date | string
@@ -6491,29 +6630,49 @@ export namespace Prisma {
 
   export type estimatesCreateManyUserInput = {
     id?: string
-    content?: estimatesCreatecontentInput | string[]
     title: string
+    battery: string
+    panel: string
+    inverter: string
+    charge: string
+    total: string
+    estimate: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type estimatesUpdateWithoutUserInput = {
-    content?: estimatesUpdatecontentInput | string[]
     title?: StringFieldUpdateOperationsInput | string
+    battery?: StringFieldUpdateOperationsInput | string
+    panel?: StringFieldUpdateOperationsInput | string
+    inverter?: StringFieldUpdateOperationsInput | string
+    charge?: StringFieldUpdateOperationsInput | string
+    total?: StringFieldUpdateOperationsInput | string
+    estimate?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type estimatesUncheckedUpdateWithoutUserInput = {
-    content?: estimatesUpdatecontentInput | string[]
     title?: StringFieldUpdateOperationsInput | string
+    battery?: StringFieldUpdateOperationsInput | string
+    panel?: StringFieldUpdateOperationsInput | string
+    inverter?: StringFieldUpdateOperationsInput | string
+    charge?: StringFieldUpdateOperationsInput | string
+    total?: StringFieldUpdateOperationsInput | string
+    estimate?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type estimatesUncheckedUpdateManyWithoutUserInput = {
-    content?: estimatesUpdatecontentInput | string[]
     title?: StringFieldUpdateOperationsInput | string
+    battery?: StringFieldUpdateOperationsInput | string
+    panel?: StringFieldUpdateOperationsInput | string
+    inverter?: StringFieldUpdateOperationsInput | string
+    charge?: StringFieldUpdateOperationsInput | string
+    total?: StringFieldUpdateOperationsInput | string
+    estimate?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
