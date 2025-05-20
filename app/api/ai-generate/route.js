@@ -1,9 +1,9 @@
 // pages/api/generate-json.js
 import { NextResponse } from "next/server";
 import { OpenAI } from "openai";
-
+const OPENAI_API_KEY="rudioyshdhdjdj"
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: OPENAI_API_KEY,
 });
 // with the respons  in this format:${sample1}
 export async function POST(req) {
