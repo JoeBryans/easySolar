@@ -1,12 +1,9 @@
 "use client";
 import Container from "@/components/Container";
-import Logo from "@/components/header/Logo";
 import { Input } from "@/components/ui/input";
+import { FetchEstimate } from "@/request/Request";
 import { Search } from "lucide-react";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import Markdown from "react-markdown";
-import ReactMarkdown from "react-markdown";
 
 const page = () => {
   const [Content, setContent] = useState([]);
@@ -19,16 +16,6 @@ const page = () => {
     fetchData();
   }, []);
   console.log("Content", Content);
-  // const mapContent = Content.map((item, index) => {
-  //   return (
-  //     <div key={index}>
-  //       {/* <ReactMarkdown>{item.content}</ReactMarkdown> */}
-  //       <Markdown>{item.content}</Markdown>
-  //     </div>
-  //   );
-  // });
-  // const Cont = JSON.parse(Content[0]);
-  // console.log("Cont", Cont);
 
   const text = `
     # Welcome to Solar AI
@@ -63,7 +50,7 @@ const page = () => {
         </div>
       </div>
       <Container>
-        <div className="flex flex-col items-center justify-center my-5 ">
+        {/* <div className="flex flex-col items-center justify-center my-5 ">
           {Content?.map((item, index) => {
             return (
               <div
@@ -81,6 +68,45 @@ const page = () => {
                       </div>
                     );
                   })}
+                </div>
+              </div>
+            );
+          })}
+        </div> */}
+        <div
+          className={`${Content?.length > 0 ? "shadow-lg drop-shadow-2xl px-5" : "flex"}  py-3 rounded-2xl my-24 mx-auto max-w-[600px] w-[95%] flex flex-col items-start justify-center`}
+        >
+          {Content?.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className="w-[90%] flex flex-col items-start justify-start gap-4"
+              >
+                {/* <ReactMarkdown>{item.content}</ReactMarkdown> */}
+                {/* <h1>{item.title}</h1> */}
+                <div className="flex flex-col gap-4">
+                  <h1 className="text-xl font-bold ">Battery :</h1>
+                  <span>{item.battery}</span>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <h1 className="text-xl font-bold ">Panel :</h1>
+                  <span>{item.panel}</span>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <h1 className="text-xl font-bold ">Inverter :</h1>
+                  <span>{item.inverter}</span>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <h1 className="text-xl font-bold ">Charge Controller :</h1>
+                  <span>{item.charge}</span>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <h1 className="text-xl font-bold ">Total :</h1>
+                  <span>{item.total}</span>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <h1 className="text-xl font-bold ">Estimate :</h1>
+                  <span>{item.estimate}</span>
                 </div>
               </div>
             );

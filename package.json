@@ -11,7 +11,7 @@
   "dependencies": {
     "@auth/mongodb-adapter": "^3.9.0",
     "@auth/prisma-adapter": "^2.9.0",
-    "@clerk/nextjs": "^6.18.0",
+    "@clerk/nextjs": "^6.20.0",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",

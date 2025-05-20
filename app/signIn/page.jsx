@@ -60,7 +60,7 @@ const SignIn = () => {
       console.log(res);
       if (!res?.ok) {
         setIsLoading(false);
-        toast.error(error?.message);
+        toast.error(res?.message);
       } else {
         setIsLoading(false);
         toast.success("user signed in ");

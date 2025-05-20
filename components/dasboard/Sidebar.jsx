@@ -13,7 +13,7 @@ import { MdOutlineDashboard } from "react-icons/md";
 import { CiMicrochip } from "react-icons/ci";
 import { GrTemplate } from "react-icons/gr";
 import { TbBrandDatabricks } from "react-icons/tb";
-
+import ProjectsBar from "../projects/Projects";
 import Logo from "../header/Logo";
 import Link from "next/link";
 import { Button } from "../ui/button";
@@ -26,21 +26,21 @@ const items = [
     url: "/dashboard",
     icon: <MdOutlineDashboard />,
   },
-  {
-    title: "Templates",
-    url: "/dashboard/template",
-    icon: <GrTemplate size={30} />,
-  },
-  {
-    title: "Ai Tools",
-    url: "/dashboard/ai-tools",
-    icon: <CiMicrochip size={60} />,
-  },
-  {
-    title: "Projects",
-    url: "/dashboard/projects",
-    icon: <TbBrandDatabricks />,
-  },
+  // {
+  //   title: "Templates",
+  //   url: "/dashboard/template",
+  //   icon: <GrTemplate size={30} />,
+  // },
+  // {
+  //   title: "Ai Tools",
+  //   url: "/dashboard/ai-tools",
+  //   icon: <CiMicrochip size={60} />,
+  // },
+  // {
+  //   title: "Projects",
+  //   url: "/dashboard/projects",
+  //   icon: <TbBrandDatabricks />,
+  // },
 ];
 //   {
 //     title: "Settings",
@@ -70,13 +70,13 @@ export function SideBar() {
           </SidebarGroupLabel>
 
           <SidebarGroupContent className="mt-5">
-            <SidebarMenu className=" flex flex-col gap-5 items-start px-2 ">
+            <SidebarMenu className=" text-zinc-800 flex flex-col gap-5 items-start px-2 ">
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <Link
                       href={item.url}
-                      className="w-full h-max hover:text-blue-600 flex font-semibold   gap-3"
+                      className="w-full text-zinc-800 h-max hover:text-blue-600 flex font-semibold   gap-3"
                     >
                       {item.icon}
                       <span>{item.title}</span>
@@ -84,6 +84,9 @@ export function SideBar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              <SidebarMenuItem className={"mx-2"}>
+                <ProjectsBar />
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

@@ -10,19 +10,15 @@ import GetUser from "./GetUser";
 import { setItem } from "@/hooks/store/localStorage";
 import { useDispatch } from "react-redux";
 import { setCredit } from "@/hooks/store/slice/userSlice";
+import { UserButton, useUser } from "@clerk/nextjs";
 
 const Navbar = () => {
   // get clerk user
-  // const user = useUser();
-  // console.log("user", user);
+  const user = useUser();
+  console.log("user", user);
   const dispatch = useDispatch();
   const [credite, setCredite] = React.useState();
-
   const path = usePathname();
-  const { data, status } = useSession();
-  const user = data?.user;
-  console.log("user", user);
-
   const startWith = path !== "/";
 
   useEffect(() => {
@@ -51,20 +47,7 @@ const Navbar = () => {
             <div className="flex-none">
               <ul className="menu menu-horizontal px-1">
                 <li className="text-lg font-demi-bold">
-                  {/* {user ? (
-                    <div className="w-10 h-10 rounded-full   flex items-center justify-center p-1">
-                      <Image
-                        src={user?.image || "/one-shot.jpeg"}
-                        alt="profie"
-                        width={800}
-                        height={800}
-                        className="rounded-full w-[100%] h-[100%] object-cover"
-                      />
-                    </div>
-                  ) : (
-                    <Link href="/sign-in">Sign In</Link>
-                  )} */}
-                  <GetUser />
+                  {user ? <UserButton /> : <Link href="/sign-in">Sign In</Link>}
                 </li>
                 <li className="text-lg font-demi-bold mx-3 hover:bg-transparent">
                   {user ? (
@@ -94,7 +77,7 @@ const Navbar = () => {
                       <Link href="/dashboard">Dashboard</Link>
                     </Button>
                   ) : (
-                    <Link href="/signIn">Sign In</Link>
+                    <Link href="/sign-in">Sign In</Link>
                   )}
                 </li>
               </ul>

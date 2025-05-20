@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/header/Navber";
 import Session from "./Session";
 import ProviderStore from "./Provider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,19 +22,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning={false}>
-      <ProviderStore>
-        <Session>
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-          >
-            <Navbar />
-            <main className="w-full overflow-x-auto hide-scrollbar">
-              {children}
-            </main>
-          </body>
-        </Session>
-      </ProviderStore>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning={false}>
+        <ProviderStore>
+          <Session>
+            <body
+              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+              <Navbar />
+              <main className="w-full overflow-x-auto text-zinc-800 hide-scrollbar">
+                {children}
+              </main>
+            </body>
+          </Session>
+        </ProviderStore>
+      </html>
+    </ClerkProvider>
   );
 }

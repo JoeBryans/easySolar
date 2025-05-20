@@ -13,19 +13,15 @@ model Post {
 }
 
 model User {
-  id              String      @id @default(auto()) @map("_id") @db.ObjectId
-  email           String      @unique
-  name            String
-  password        String
-  verifyToken     String?     @unique
-  phone           String
-  verifyExpiresAt DateTime?
-  emailVerified   Boolean     @default(false)
-  image           String?
-  credit          Int         @default(2)
-  createdAt       DateTime    @default(now()) @db.Date
-  updatedAt       DateTime    @default(now()) @db.Date
-  estimates       estimates[]
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  email     String      @unique
+  name      String
+  clerk_id  String      @unique
+  image     String?
+  credit    Int?
+  createdAt DateTime    @default(now()) @db.Date
+  updatedAt DateTime    @default(now()) @db.Date
+  estimates estimates[]
 }
 
 model accounts {

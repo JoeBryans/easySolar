@@ -71,7 +71,7 @@ export async function POST(request) {
   }
 }
 
-export async function GET(request) {
+export async function GET() {
   const user = await getServerSession(authOptions);
   const userId = user.user.id;
   try {
