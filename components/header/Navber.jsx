@@ -1,6 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
-// import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -8,25 +7,27 @@ import { Button } from "../ui/button";
 import { setItem } from "@/hooks/store/localStorage";
 import { useDispatch } from "react-redux";
 import { setCredit } from "@/hooks/store/slice/userSlice";
-import { UserButton, useUser } from "@clerk/nextjs";
 import { Action } from "@/request/action";
+import GetUser from "./GetUser";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
-  // get clerk user
-  const currentUser = useUser();
-  const user = currentUser?.user;
+  const { data, status } = useSession();
+  const user = data?.user;
   console.log(user);
   const dispatch = useDispatch();
-  const [credite, setCredite] = React.useState();
+  const [credite, setCredite] = useState(null);
   const path = usePathname();
   const startWith = path !== "/";
-
   useEffect(() => {
     if (!user) {
       return;
     } else {
       const FetchData = async () => {
-        const credite = await Action.getUserCredit(user.id);
+        const res = await fetch("/api/credit");
+        const credite = await res.json();
+        console.log("credite", credite);
+
         dispatch(setCredit(credite));
         setItem("credit", credite);
         setCredite(credite);
@@ -45,7 +46,7 @@ const Navbar = () => {
             <div className="flex-none">
               <ul className="menu menu-horizontal px-1">
                 <li className="text-lg font-demi-bold">
-                  {user ? <UserButton /> : <Link href="/sign-in">Sign In</Link>}
+                  <GetUser />
                 </li>
                 <li className="text-lg font-demi-bold mx-3 hover:bg-transparent">
                   {user ? (
@@ -70,13 +71,19 @@ const Navbar = () => {
             <div className="flex-none">
               <ul className="menu menu-horizontal px-1">
                 <li className="text-lg font-demi-bold">
-                  {user ? (
-                    <Button variant={"outline"} className="w-max">
-                      <Link href="/dashboard">Dashboard</Link>
-                    </Button>
-                  ) : (
-                    <Link href="/sign-in">Sign In</Link>
-                  )}
+                  {
+                    user ? (
+                      <Link
+                        className="bg-zinc-300 px-2 rounded-lg "
+                        href="/dashboard"
+                      >
+                        Dashboard
+                      </Link>
+                    ) : null
+                    //  : (
+                    //   <Link href="/signIn">Sign In</Link>
+                    // )
+                  }
                 </li>
               </ul>
             </div>

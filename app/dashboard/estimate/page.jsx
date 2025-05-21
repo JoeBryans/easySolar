@@ -25,7 +25,7 @@ const page = () => {
     e.preventDefault();
     if (UserCredit === 0) {
       alert("Credit not enough, please add credit");
-      return router.push("/dashboard");
+      return router.push("/payment");
     }
     setLoading(true);
     try {

@@ -26,19 +26,4 @@ export const Action = {
       console.log(error);
     }
   },
-  getUserCredit: async ({ userId }) => {
-    try {
-      const user = await prisma.user.findUnique({
-        where: {
-          clerk_id: userId,
-        },
-        select: {
-          credit: true,
-        },
-      });
-      return user;
-    } catch (error) {
-      console.log(error);
-    }
-  },
 };

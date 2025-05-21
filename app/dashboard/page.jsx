@@ -9,13 +9,13 @@ const page = () => {
   const [Content, setContent] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("/api/estimate");
+      const res = await fetch(`/api/estimate`);
       const data = await res?.json();
       setContent(data);
     };
     fetchData();
   }, []);
-  console.log("Content", Content);
+  // console.log("Content", Content);
 
   const text = `
     # Welcome to Solar AI
