@@ -4,7 +4,7 @@ import { useState } from "react";
 import PricingSection from "./Plan";
 
 const Pay = () => {
-  const [selectPlan, setSelectPlan] = useState([]);
+  const [selectPlan, setSelectPlan] = useState(null);
   console.log(selectPlan);
 
   return (
