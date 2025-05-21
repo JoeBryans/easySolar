@@ -8,20 +8,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-}
-
 model User {
-  id        String      @id @default(auto()) @map("_id") @db.ObjectId
-  email     String      @unique
-  name      String
-  image     String?
-  credit    Int?
-  createdAt DateTime    @default(now()) @db.Date
-  updatedAt DateTime    @default(now()) @db.Date
-  estimates estimates[]
-  Payment   Payment[]
+  id              String      @id @default(auto()) @map("_id") @db.ObjectId
+  email           String      @unique
+  name            String
+  image           String?
+  password        String
+  phone           String?
+  verifyToken     Int?
+  credit          Int?
+  emailVerified   Boolean     @default(false)
+  verifyExpiresAt DateTime    @default(now()) @db.Date
+  createdAt       DateTime    @default(now()) @db.Date
+  updatedAt       DateTime    @default(now()) @db.Date
+  estimates       estimates[]
+  Payment         Payment[]
 }
 
 model accounts {

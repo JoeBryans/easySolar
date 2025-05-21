@@ -2,7 +2,6 @@ import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { SendVerificationMail } from "@/lib/mailer";
-// import { SendMail } from "@/lib/sendMail";
 
 export async function POST(req) {
   const body = await req.json();
