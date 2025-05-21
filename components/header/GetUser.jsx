@@ -23,7 +23,6 @@ import {
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { Button } from "../ui/button";
 
 const GetUser = ({ role }) => {
   const { data, status } = useSession();

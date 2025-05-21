@@ -3,11 +3,9 @@ import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Button } from "../ui/button";
 import { setItem } from "@/hooks/store/localStorage";
 import { useDispatch } from "react-redux";
 import { setCredit } from "@/hooks/store/slice/userSlice";
-import { Action } from "@/request/action";
 import GetUser from "./GetUser";
 import { useSession } from "next-auth/react";
 
