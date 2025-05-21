@@ -1,16 +1,19 @@
 import Paystack from "paystack";
 import { NextResponse } from "next/server";
+import prisma from "@/lib/db";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 const paystack = Paystack(process.env.PAYSTACK_SECRET_KEY);
 
 export async function GET(req) {
-  // get url params
-  //  const param=URL
+  const user = await getServerSession(authOptions);
+  if (!user) {
+    return NextResponse.json({ error: "You must be logged in to do this." });
+  }
+  const userId = user?.user?.id;
   const url = new URL(req.url);
   const urlParams = new URLSearchParams(url.searchParams);
   const reference = urlParams.get("reference");
-  console.log("url", url);
-  console.log("urlParams", urlParams);
-  console.log("reference", reference);
 
   if (!reference) {
     return NextResponse.json({ error: "Transaction reference is required." });
@@ -20,8 +23,25 @@ export async function GET(req) {
     const response = await paystack.transaction.verify(reference);
     console.log("response", response);
     if (response?.status && response?.data.status === "success") {
-      // Payment was successful!
-      // IMPORTANT: Update your database here, fulfill the order, grant access, etc.
+      const validCredit = await prisma.user.findUnique({
+        where: {
+          id: userId,
+        },
+        select: {
+          credit: true,
+        },
+      });
+      const newCredit = validCredit.credit + 15;
+      const credit = await prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          credit: newCredit,
+        },
+      });
+      console.log("credit", credit);
+
       console.log("Payment successful:", response.data);
     } else {
       // Payment failed or is not yet successful

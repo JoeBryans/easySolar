@@ -17,7 +17,7 @@ export const config = {
 };
 
 export async function POST(req, res) {
-  const user = getServerSession(authOptions);
+  const user = await getServerSession(authOptions);
   const userId = user?.user?.id;
   console.log("userId", userId);
 
