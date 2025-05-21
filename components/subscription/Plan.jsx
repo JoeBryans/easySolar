@@ -8,42 +8,46 @@ const pricingPlans = [
   {
     id: 1,
     name: "Basic",
-    price: "9",
+    price: "4",
+    credit: 20,
     frequency: "/month",
-    features: [
-      "500 messages",
-      "2GB storage",
-      "Basic analytics",
-      "Community support",
-    ],
+    // features: [
+    //   "500 messages",
+    //   "2GB storage",
+    //   "Basic analytics",
+    //   "Community support",
+    // ],
     isPopular: false,
   },
   {
     id: 2,
     name: "Pro",
-    price: "29",
+    price: "10",
+    credit: 50,
+
     frequency: "/month",
-    features: [
-      "Unlimited messages",
-      "10GB storage",
-      "Advanced analytics",
-      "Priority email support",
-      "Custom branding",
-    ],
+    // features: [
+    //   "Unlimited messages",
+    //   "10GB storage",
+    //   "Advanced analytics",
+    //   "Priority email support",
+    //   "Custom branding",
+    // ],
     isPopular: true, // Highlight this plan
   },
   {
     id: 3,
     name: "Premium",
-    price: "59",
+    price: "15",
+    credit: 100,
     frequency: "/month",
-    features: [
-      "All Pro features",
-      "Unlimited storage",
-      "Real-time analytics",
-      "24/7 phone support",
-      "Dedicated account manager",
-    ],
+    // features: [
+    //   "All Pro features",
+    //   "Unlimited storage",
+    //   "Real-time analytics",
+    //   "24/7 phone support",
+    //   "Dedicated account manager",
+    // ],
     isPopular: false,
   },
 ];
@@ -114,9 +118,11 @@ function PricingCard({ plan }) {
           <span className="text-4xl font-extrabold text-gray-900">
             ${plan.price}
           </span>
-          <span className="text-lg font-medium">{plan.frequency}</span>
+          {plan.credit && (
+            <span className="text-lg font-medium">{plan.credit} credits</span>
+          )}
         </p>
-        <ul className="flex-grow space-y-3 mb-8">
+        {/* <ul className="flex-grow space-y-3 mb-8">
           {plan.features.map((feature, index) => (
             <li key={index} className="flex items-center text-gray-700">
               <svg
@@ -133,7 +139,7 @@ function PricingCard({ plan }) {
               {feature}
             </li>
           ))}
-        </ul>
+        </ul> */}
 
         <button
           className={`mt-auto cursor-pointer w-full py-3 px-6 rounded-md text-lg font-semibold transition-colors duration-200 ${
@@ -150,16 +156,11 @@ function PricingCard({ plan }) {
   );
 }
 
-function PricingSection({ selectPlan, setSelectPlan }) {
+function PricingSection() {
   return (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       {pricingPlans.map((plan) => (
-        <PricingCard
-          key={plan.id}
-          plan={plan}
-          //   selectPlan={selectPlan}
-          //   setSelectPlan={setSelectPlan}
-        />
+        <PricingCard key={plan.id} plan={plan} />
       ))}
     </div>
   );

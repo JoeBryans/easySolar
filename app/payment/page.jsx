@@ -1,6 +1,5 @@
 "use client";
 import Container from "@/components/Container";
-import Pay from "@/components/subscription/Pay";
 import SelectedItem from "@/components/subscription/SelectedPlan";
 import { LoaderCircleIcon } from "lucide-react";
 import { useRouter } from "next/navigation";

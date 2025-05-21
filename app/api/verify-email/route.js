@@ -37,6 +37,7 @@ export async function POST(req) {
       },
       data: {
         emailVerified: true,
+        verifyToken: null,
       },
     });
     const { password, ...rest } = verify;

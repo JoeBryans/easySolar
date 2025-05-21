@@ -26,8 +26,11 @@ export default function SelectedItem() {
     text: "Pay now",
     publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY, // Your Paystack Public Key
     metadata: {
-      user: user?.name, // Optional metadata
+      user: user?.name,
+      userId: user?.id, // Optional metadata
+      email: user?.email, // Optional metadata
       phone: user?.phone,
+      credit: plan?.credit,
     },
     onSuccess: (reference) => {
       console.log("Payment successful:", reference);
@@ -75,9 +78,11 @@ export default function SelectedItem() {
         <span className="text-4xl font-extrabold text-gray-900">
           ${plan?.price}
         </span>
-        <span className="text-lg font-medium">{plan?.frequency}</span>
+        {plan.credit && (
+          <span className="text-lg font-medium">{plan.credit} credits</span>
+        )}
       </p>
-      <ul className="flex-grow space-y-3 mb-8">
+      {/* <ul className="flex-grow space-y-3 mb-8">
         {plan?.features?.map((feature, index) => (
           <li key={index} className="flex items-center text-gray-700">
             <svg
@@ -94,7 +99,7 @@ export default function SelectedItem() {
             {feature}
           </li>
         ))}
-      </ul>
+      </ul> */}
       <PaystackButton
         className="mt-auto cursor-pointer w-full py-3 px-6 rounded-md text-lg font-semibold transition-colors duration-200 ${
         bg-blue-600 hover:bg-blue-700 text-white"

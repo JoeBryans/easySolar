@@ -1,8 +1,6 @@
 // import { buffer } from "micro"; // Helps read raw body for webhook verification
-import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/db";
 import crypto from "crypto";
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import Paystack from "paystack";
 
@@ -17,21 +15,21 @@ export const config = {
 };
 
 export async function POST(req, res) {
-  const user = await getServerSession(authOptions);
-  const userId = user?.user?.id;
-  console.log("userId", userId);
-
   const secret = process.env.PAYSTACK_SECRET_KEY;
-  const signature = req.headers["x-paystack-signature"];
+  console.log("secret", secret);
+  const signature = req.headers.get("x-paystack-signature");
+  console.log("signature", signature);
 
   // Get the raw body buffer
   const rawBody = await req.text();
+  // console.log("rawBody", rawBody);
+
   // const rawBody = await buffer(req);
   const body = rawBody.toString();
-
+  console.log("body", body);
   // Verify the signature
   const hash = crypto.createHmac("sha512", secret).update(body).digest("hex");
-
+  console.log("hash", hash);
   if (hash === signature) {
     const event = JSON.parse(body);
 
@@ -40,7 +38,12 @@ export async function POST(req, res) {
     switch (event.event) {
       case "charge.success":
         // Payment was successful!
-        console.log("Webhook: Charge successful", event.data);
+        const paymentData = event?.data;
+        console.log("Webhook: Charge successful", paymentData);
+        const metaData = paymentData?.metadata;
+        const userId = metaData.userId;
+        // console.log("Webhook: Metadata", metaData);
+        // console.log("metaData: userId", userId);
         const validCredit = await prisma.user.findUnique({
           where: {
             id: userId,
@@ -49,7 +52,7 @@ export async function POST(req, res) {
             credit: true,
           },
         });
-        const newCredit = validCredit.credit + 100;
+        const newCredit = validCredit.credit + metaData.credit;
         const credit = await prisma.user.update({
           where: {
             id: userId,
@@ -58,6 +61,19 @@ export async function POST(req, res) {
             credit: newCredit,
           },
         });
+        const payment = await prisma.payment.create({
+          data: {
+            amount: paymentData.amount,
+            currency: paymentData.currency,
+            paymentId: paymentData.id,
+            reference: paymentData.reference,
+            PaymentMethod: paymentData?.channel,
+            status: paymentData.status,
+            metadata: metaData,
+            userId: metaData.userId,
+          },
+        });
+        console.log("payment", payment);
         console.log("credit", credit);
 
         // THIS IS WHERE YOU SHOULD FULFILL THE ORDER, UPDATE YOUR DATABASE, ETC.

@@ -1,5 +1,5 @@
 import Container from "@/components/Container";
-import Pay from "@/components/subscription/Pay";
+import PricingSection from "@/components/subscription/Plan";
 import React from "react";
 
 const page = () => {
@@ -8,8 +8,8 @@ const page = () => {
       <Container>
         <div className="w-full  min-h-full flex flex-col justify-center items-center">
           <h1 className="text-xl font-bold text-zinc-800">Payment</h1>
-          <div>
-            <Pay />
+          <div className="w-max-[500px] w-[90%] p-3 mx-auto  flex  flex-col  gap-5 ">
+            <PricingSection />
           </div>
         </div>
       </Container>

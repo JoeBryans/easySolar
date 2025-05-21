@@ -13,19 +13,15 @@ model Post {
 }
 
 model User {
-  id              String      @id @default(auto()) @map("_id") @db.ObjectId
-  email           String      @unique
-  name            String
-  password        String
-  verifyToken     String?     @unique
-  phone           String
-  verifyExpiresAt DateTime?
-  emailVerified   Boolean     @default(false)
-  image           String?
-  credit          Int         @default(2)
-  createdAt       DateTime    @default(now()) @db.Date
-  updatedAt       DateTime    @default(now()) @db.Date
-  estimates       estimates[]
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  email     String      @unique
+  name      String
+  image     String?
+  credit    Int?
+  createdAt DateTime    @default(now()) @db.Date
+  updatedAt DateTime    @default(now()) @db.Date
+  estimates estimates[]
+  Payment   Payment[]
 }
 
 model accounts {
@@ -52,4 +48,19 @@ model estimates {
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now()) @db.Date
   updatedAt DateTime @default(now()) @db.Date
+}
+
+model Payment {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  amount        Int
+  currency      String   @default("NGN")
+  paymentId     Int      @unique
+  reference     String   @unique
+  PaymentMethod String?
+  status        String   @default("pending")
+  metadata      Json?
+  createdAt     DateTime @default(now()) @db.Date
+  updatedAt     DateTime @default(now()) @db.Date
+  userId        String   @db.ObjectId
+  user          User     @relation(fields: [userId], references: [id])
 }

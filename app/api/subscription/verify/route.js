@@ -10,7 +10,7 @@ export async function GET(req) {
   if (!user) {
     return NextResponse.json({ error: "You must be logged in to do this." });
   }
-  const userId = user?.user?.id;
+
   const url = new URL(req.url);
   const urlParams = new URLSearchParams(url.searchParams);
   const reference = urlParams.get("reference");
@@ -21,39 +21,35 @@ export async function GET(req) {
 
   try {
     const response = await paystack.transaction.verify(reference);
-    console.log("response", response);
-    if (response?.status && response?.data.status === "success") {
-      const validCredit = await prisma.user.findUnique({
-        where: {
-          id: userId,
-        },
-        select: {
-          credit: true,
-        },
-      });
-      const newCredit = validCredit.credit + 15;
-      const credit = await prisma.user.update({
-        where: {
-          id: userId,
-        },
-        data: {
-          credit: newCredit,
-        },
-      });
-      console.log("credit", credit);
+    // console.log("response", response);
+    // const metaData = response?.data?.metadata;
+    // if (response?.status && response?.data.status === "success") {
+    //   const validCredit = await prisma.user.findUnique({
+    //     where: {
+    //       id: userId,
+    //     },
+    //     select: {
+    //       credit: true,
+    //     },
+    //   });
+    //   const newCredit = validCredit.credit + metaData.credit;
+    //   const credit = await prisma.user.update({
+    //     where: {
+    //       id: userId,
+    //     },
+    //     data: {
+    //       credit: newCredit,
+    //     },
+    //   });
+    //   console.log("credit", credit);
+    // } else {
+    //   // Payment failed or is not yet successful
 
-      console.log("Payment successful:", response.data);
-    } else {
-      // Payment failed or is not yet successful
-      console.warn(
-        "Payment verification failed or not successful:",
-        response.data
-      );
-      return NextResponse.json({
-        error: "Payment verification failed",
-        data: response.data,
-      });
-    }
+    //   return NextResponse.json({
+    //     error: "Payment verification failed",
+    //     data: response.data,
+    //   });
+    // }
 
     return NextResponse.json({ message: "Payment successful", data: response });
   } catch (error) {
