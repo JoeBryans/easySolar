@@ -69,19 +69,16 @@ const Navbar = () => {
             <div className="flex-none">
               <ul className="menu menu-horizontal px-1">
                 <li className="text-lg font-demi-bold">
-                  {
-                    user ? (
-                      <Link
-                        className="bg-zinc-300 px-2 rounded-lg "
-                        href="/dashboard"
-                      >
-                        Dashboard
-                      </Link>
-                    ) : null
-                    //  : (
-                    //   <Link href="/signIn">Sign In</Link>
-                    // )
-                  }
+                  {user ? (
+                    <Link
+                      className="bg-zinc-300 px-2 rounded-lg "
+                      href="/dashboard"
+                    >
+                      Dashboard
+                    </Link>
+                  ) : (
+                    <Link href="/signIn">Sign In</Link>
+                  )}
                 </li>
               </ul>
             </div>

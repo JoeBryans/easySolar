@@ -266,7 +266,7 @@ const SignUp = () => {
                   <span>
                     Alread have an account with Shopbite ?{" "}
                     <Link
-                      href={"/sign-in"}
+                      href={"/signIn"}
                       className="font-semibold hover:underline text-blue-500"
                     >
                       sign in
