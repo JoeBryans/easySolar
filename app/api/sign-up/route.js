@@ -6,6 +6,7 @@ import { SendVerificationMail } from "@/lib/mailer";
 export async function POST(req) {
   const body = await req.json();
   const { email, password, name } = body;
+
   try {
     const existUser = await prisma.user.findUnique({ where: { email: email } });
     if (existUser) {
@@ -18,7 +19,7 @@ export async function POST(req) {
     }
 
     const passwordHash = await bcrypt.hash(password ?? "", 10);
-    const verifyToken = generateOTP().toString();
+    const verifyToken = generateOTP();
     const imageUrl = `https://avatar.iran.liara.run/username?username=${body.email}`;
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + 1); // Expires in 1 day
@@ -33,7 +34,6 @@ export async function POST(req) {
         verifyExpiresAt: expiresAt,
       },
     });
-    console.log("user", user);
     SendVerificationMail(email, name, verifyToken);
     // SendMail(email, name, verifyToken);
 

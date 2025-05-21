@@ -89,12 +89,7 @@ const SignIn = () => {
       />
       <Container>
         <div className="flex flex-col items-center justify-center w-full h-full ">
-          {/* <SignIn /> */}
-
           <Card className=" max-w-[500px] w-[90%] h-max">
-            {/* <CardHeader className="">
-          <span>Create Account</span>
-        </CardHeader> */}
             <CardContent className=" flex flex-col items-start p-3 mx-auto ">
               <form
                 className="max-w-[450px] w-[95%]  block mx-auto"

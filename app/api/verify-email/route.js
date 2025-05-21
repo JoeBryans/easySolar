@@ -4,13 +4,16 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   const body = await req.json();
   const userId = body.userId;
+
   const verifyToken = body.verifyToken;
+  const Token = Number(verifyToken);
+  // console.log("verify:verifyToken", Token);
   // const { userId } = await params;
   try {
     const user = await prisma.user.findUnique({
       where: {
         id: userId,
-        verifyToken: verifyToken,
+        verifyToken: Token,
       },
     });
     if (!user) {
