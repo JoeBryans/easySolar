@@ -5,35 +5,33 @@ import Logo from "./Logo";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { useSession } from "next-auth/react";
-import GetUser from "./GetUser";
 import { setItem } from "@/hooks/store/localStorage";
 import { useDispatch } from "react-redux";
 import { setCredit } from "@/hooks/store/slice/userSlice";
 import { UserButton, useUser } from "@clerk/nextjs";
+import { Action } from "@/request/action";
 
 const Navbar = () => {
   // get clerk user
-  const user = useUser();
-  console.log("user", user);
+  const currentUser = useUser();
+  const user = currentUser?.user;
+  console.log(user);
   const dispatch = useDispatch();
   const [credite, setCredite] = React.useState();
   const path = usePathname();
   const startWith = path !== "/";
 
   useEffect(() => {
-    if (user) {
+    if (!user) {
+      return;
+    } else {
       const FetchData = async () => {
-        const res = await fetch("/api/user/credite");
-        const data = await res.json();
-        console.log(data);
-        dispatch(setCredit(data));
-        setItem("credit", data);
-        setCredite(data);
+        const credite = await Action.getUserCredit(user.id);
+        dispatch(setCredit(credite));
+        setItem("credit", credite);
+        setCredite(credite);
       };
       FetchData();
-    } else {
-      return;
     }
   }, [user]);
   return (

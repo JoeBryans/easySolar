@@ -1,7 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/header/Navber";
-import Session from "./Session";
 import ProviderStore from "./Provider";
 import { ClerkProvider } from "@clerk/nextjs";
 
@@ -25,16 +24,14 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning={false}>
         <ProviderStore>
-          <Session>
-            <body
-              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-            >
-              <Navbar />
-              <main className="w-full overflow-x-auto text-zinc-800 hide-scrollbar">
-                {children}
-              </main>
-            </body>
-          </Session>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <Navbar />
+            <main className="w-full overflow-x-auto text-zinc-800 hide-scrollbar">
+              {children}
+            </main>
+          </body>
         </ProviderStore>
       </html>
     </ClerkProvider>
