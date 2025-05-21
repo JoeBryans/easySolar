@@ -64,7 +64,7 @@ const SignIn = () => {
       } else {
         setIsLoading(false);
         toast.success("user signed in ");
-        // router.push("/");
+        router.push("/");
       }
     } catch (error) {
       setIsLoading(false);
@@ -168,7 +168,8 @@ const SignIn = () => {
                     className="p-2 rounded-lg text-white bg-blue-600 hover:bg-white hover:text-blue-600 hover:border-blue-600 hover:border-2 font-semibold transition:all w-full px-3 cursor-pointer"
                   >
                     {isLoading ? (
-                      <span className="flex items-center justify-center">
+                      <span className="flex items-center gap-2">
+                        <span>sign in</span>
                         <LoaderCircle className="animate-spin" />
                       </span>
                     ) : (

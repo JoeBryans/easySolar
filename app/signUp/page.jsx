@@ -231,34 +231,18 @@ const SignUp = () => {
                     className="focuse:outline-0 fucous:border-0 border-2 rounded-lg py-2"
                   />
                 </Label>
-                {/* <div className="w-full mt-3 px-5 ">
-                  {criterial.map((items, i) => (
-                    <div className={"flex items-center gap-3"}>
-                      <Input
-                        type={"checkbox"}
-                        checked={items.regEx.test(password)}
-                        className="w-4 h-4 text-blue-600 bg-gray-100 rounded-md"
-                      />
-                      <span
-                        className={`${
-                          items.regEx.test(password)
-                            ? "text-green-600 "
-                            : "text-red-600"
-                        } `}
-                      >
-                        {items.message}
-                      </span>
-                    </div>
-                  ))}
-                </div> */}
+
                 <div className="flex flex-col gap-3 items-start px-3 py-1 w-full mt-2 mb-2">
                   <Button
                     disabled={isLoading && isLoading}
                     variant={"primary"}
-                    className="p-2 rounded-lg text-white bg-blue-600 hover:bg-white hover:text-blue-600 hover:border-blue-600 hover:border-2 font-semibold transition:all w-full px-3 cursor-pointer "
+                    className="p-2 rounded-lg text-white bg-blue-600 hover:bg-white hover:text-blue-600 hover:border-blue-600 hover:border-2 font-semibold transition:all w-full px-3 cursor-pointer flex items-center gap-2 justify-center"
                   >
                     {isLoading ? (
-                      <LoaderCircle className="animate-spin" />
+                      <span className="flex items-center gap-2">
+                        <span>sign up</span>
+                        <LoaderCircle className="animate-spin" />
+                      </span>
                     ) : (
                       "sign up"
                     )}

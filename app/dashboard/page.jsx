@@ -74,13 +74,13 @@ const page = () => {
           })}
         </div> */}
         <div
-          className={`${Content?.length > 0 ? "shadow-lg drop-shadow-2xl px-5" : "flex"}  py-3 rounded-2xl my-24 mx-auto max-w-[600px] w-[95%] flex flex-col items-start justify-center`}
+          className={`${Content?.length > 0 ? " px-5" : "flex"}  py-3 rounded-2xl my-24 mx-auto max-w-[600px] w-[95%] flex flex-col items-start justify-center gap-10`}
         >
           {Content?.map((item, index) => {
             return (
               <div
                 key={index}
-                className="w-[90%] flex flex-col items-start justify-start gap-4"
+                className="shadow-lg drop-shadow-2xl p-5 w-[90%] flex flex-col items-start justify-start gap-4"
               >
                 {/* <ReactMarkdown>{item.content}</ReactMarkdown> */}
                 {/* <h1>{item.title}</h1> */}

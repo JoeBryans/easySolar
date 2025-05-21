@@ -74,7 +74,12 @@ export async function POST(request) {
 export async function GET(req) {
   const user = await getServerSession(authOptions);
   console.log("userinfo", user);
-  const userId = user.id;
+  const userId = user?.user?.id;
+  if (!user) {
+    return new NextResponse("User not found", {
+      status: 404,
+    });
+  }
   try {
     const extimate = await prisma.estimates.findMany({
       where: {
