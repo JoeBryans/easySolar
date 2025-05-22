@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/header/Navber";
 import Session from "./Session";
 import ProviderStore from "./Provider";
+import Footer from "@/components/footer/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,12 +26,13 @@ export default function RootLayout({ children }) {
       <ProviderStore>
         <Session>
           <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
           >
             <Navbar />
-            <main className="w-full overflow-x-auto text-zinc-800 hide-scrollbar">
+            <main className="w-full min-h-[100vh] overflow-x-auto text-zinc-800 hide-scrollbar">
               {children}
             </main>
+            <Footer />
           </body>
         </Session>
       </ProviderStore>

@@ -53,24 +53,24 @@ const SignIn = () => {
       toast.error(error?.message);
     }
   };
-  const Google = async (data) => {
-    setIsLoading(true);
-    try {
-      const res = await signIn("google");
-      console.log(res);
-      if (!res?.ok) {
-        setIsLoading(false);
-        toast.error(res?.message);
-      } else {
-        setIsLoading(false);
-        toast.success("user signed in ");
-        router.push("/");
-      }
-    } catch (error) {
-      setIsLoading(false);
-      toast.error(error?.message);
-    }
-  };
+  // const Google = async (data) => {
+  //   setIsLoading(true);
+  //   try {
+  //     const res = await signIn("google");
+  //     console.log(res);
+  //     if (!res?.ok) {
+  //       setIsLoading(false);
+  //       toast.error(res?.message);
+  //     } else {
+  //       setIsLoading(false);
+  //       toast.success("user signed in ");
+  //       router.push("/");
+  //     }
+  //   } catch (error) {
+  //     setIsLoading(false);
+  //     toast.error(error?.message);
+  //   }
+  // };
 
   return (
     <div>
@@ -87,15 +87,15 @@ const SignIn = () => {
         theme="light"
         transition={Bounce}
       />
-      <Container>
-        <div className="flex flex-col items-center justify-center w-full h-full ">
+      <Container className=" h-[100vh] flex flex-col  justify-center ">
+        <div className=" flex flex-col items-center justify-center w-full h-full ">
           <Card className=" max-w-[500px] w-[90%] h-max">
             <CardContent className=" flex flex-col items-start p-3 mx-auto ">
               <form
                 className="max-w-[450px] w-[95%]  block mx-auto"
                 onSubmit={handleSubmit(onSubmit)}
               >
-                <div className="flex w-full  px-3 gap-3 items-center justify-center mb-3 ">
+                {/* <div className="flex w-full  px-3 gap-3 items-center justify-center mb-3 ">
                   <Button
                     type="button"
                     className=" cursor-pointer bg-red-700 text-white  font-semibold  w-max"
@@ -125,7 +125,7 @@ const SignIn = () => {
                     <FaIcons.FaGithub size={20} />
                     <span className="hidden md:block">Github</span>
                   </Button>
-                </div>
+                </div> */}
                 <Label
                   htmlFor="email"
                   className="flex flex-col gap-3 items-start px-3 py-1 w-full "

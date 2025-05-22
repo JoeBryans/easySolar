@@ -97,20 +97,7 @@ const SignUp = () => {
       toast.error(error?.message);
     }
   };
-  const handleError = (error) => {
-    console.log(error.message);
-    toast.error(error.message);
-  };
-  const handleSuccess = (res) => {
-    toast.success("Uploaded successfully");
-    setImage(res.url);
-  };
-  const handleStart = (res) => {
-    console.log(res);
-  };
-  const handleEnd = (res) => {
-    console.log(res);
-  };
+
   return (
     <>
       <ToastContainer
@@ -126,7 +113,7 @@ const SignUp = () => {
         theme="light"
         transition={Bounce}
       />
-      <Container>
+      <Container className=" h-[100vh] flex flex-col  justify-center ">
         <div className="flex flex-col items-center justify-center w-full h-full ">
           <Card className=" max-w-[500px] w-[90%] h-max text-slate-800">
             <CardHeader className="w-full flex items-center justify-center">
@@ -137,7 +124,7 @@ const SignUp = () => {
                 className=" block mx-auto"
                 onSubmit={handleSubmit(onSubmit)}
               >
-                <div className="flex w-full  px-3 gap-3 items-center justify-center mb-3 ">
+                {/* <div className="flex w-full  px-3 gap-3 items-center justify-center mb-3 ">
                   <Button
                     type="button"
                     className=" bg-red-700 text-white  font-semibold  w-max"
@@ -166,7 +153,7 @@ const SignUp = () => {
                     <FaIcons.FaGithub size={20} />
                     <span className="hidden md:block">Github</span>
                   </Button>
-                </div>
+                </div> */}
                 <Label
                   htmlFor="name"
                   className="flex flex-col gap-3 items-start px-3 py-1 w-full "
